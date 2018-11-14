@@ -128,3 +128,17 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+.scrollBreak {
+  display: block;
+  margin: 10px 0;
+  line-height: 600px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:visited {
+  color: black;
+}

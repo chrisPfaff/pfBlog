@@ -1,28 +1,34 @@
 import React, { Component } from "react";
+import { Link, Route } from "react-router-dom";
+
 import Header from "./Header";
 import Line from "./Line";
+import Blog from "./Blog";
+import About from "./About";
+import Links from "./Links";
 //import RouteButtons from "./RouteButtons";
 import "../styles/app.scss";
 import "../styles/routebuttons.scss";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div>
-        <Header />
-        <Line />
-        <div className="routeButtons">
-          <button>Blog</button>
-          <button>About Me</button>
-          <button>Links</button>
-        </div>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div>
+    <Header />
+    <Line />
+    <div className="routeButtons">
+      <Link to="/blog" className="link">
+        Blog
+      </Link>
+      <Link to="/about" className="link">
+        About
+      </Link>
+      <Link to="/links" className="link">
+        Links
+      </Link>
+    </div>
+    <div>
+      <Route path="/blog" component={Blog} />
+    </div>
+  </div>
+);
 
 export default App;
