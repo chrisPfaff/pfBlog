@@ -1,0 +1,30 @@
+.routeButtons {
+  animation: 1.6s ease-out 0s 1 slideInFromBottomButtons;
+  text-align: center;
+}
+
+.routeButtons button {
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  cursor: pointer;
+  padding: 10px 40px;
+}
+
+.routeButtons button:not(:last-child) {
+  border-right: none;
+}
+
+.routeButtons button:hover {
+  background-color: white;
+  color: black;
+}
+
+@keyframes slideInFromBottomButtons {
+  0% {
+    transform: translateY(800%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

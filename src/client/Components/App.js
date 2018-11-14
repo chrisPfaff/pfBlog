@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Header from "./Header";
+import Line from "./Line";
+//import RouteButtons from "./RouteButtons";
 import "../styles/app.scss";
+import "../styles/routebuttons.scss";
 
 class App extends Component {
   constructor(props) {
@@ -8,7 +11,17 @@ class App extends Component {
   }
 
   render() {
-    return <Header />;
+    return (
+      <div>
+        <Header />
+        <Line />
+        <div className="routeButtons">
+          <button>Blog</button>
+          <button>About Me</button>
+          <button>Links</button>
+        </div>
+      </div>
+    );
   }
 }
 
