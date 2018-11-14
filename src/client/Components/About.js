@@ -21,6 +21,11 @@ class About extends Component {
             src="src/client/img/chris.jpg"
             alt="picture of myself"
           />
+          <br />
+          <p className="aboutParagraph">
+            My name is Christoper Pfaff and I am an aspiring developer living in
+            Austin, TX.
+          </p>
         </div>
       </div>
     );

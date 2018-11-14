@@ -1,16 +1,16 @@
 @import url("https://fonts.googleapis.com/css?family=Asul:700");
 
-.aboutContainer {
+.blogContainer {
   text-align: center;
   padding: 50px;
 }
-.aboutImage {
-  border: solid black;
-  border-radius: 50px;
-  box-shadow: 2px 2px gray;
+
+.date {
+  font-family: "Asul", sans-serif;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
 }
 
-.aboutParagraph {
-  padding: 50px;
-  font-family: "Asul", sans-serif;
+.codeSandBox {
+  padding: 10px;
 }
