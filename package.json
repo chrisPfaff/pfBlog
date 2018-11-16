@@ -5,8 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "npm run build && webpack-dev-server --mode development --devtool inline-source-map --hot",
-    "deploy": "gh-pages -d build"
+    "dev": "npm run build && webpack-dev-server --mode development --devtool inline-source-map --hot"
   },
   "keywords": [],
   "author": "Chris Pfaff",
@@ -27,7 +26,6 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
     "file-loader": "^2.0.0",
-    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.10.0",
     "sass-loader": "^7.1.0",
