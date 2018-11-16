@@ -8,8 +8,8 @@
   },
   "scripts": {
     "build": "webpack --mode production",
-    "dev": "npm run build && webpack-dev-server --mode development --devtool inline-source-map --hot",
-    "start": "node server.js",
+    "start": "npm run build && webpack-dev-server --mode development --devtool inline-source-map --hot",
+    "dev": "node server.js",
     "heroku-postbuild": "webpack -p"
   },
   "keywords": [],
