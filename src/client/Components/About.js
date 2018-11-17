@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Header from "./Header";
+import EmailModal from "./EmailModal";
 import "../styles/about.scss";
 
 //import "../styles/line.scss";
@@ -7,6 +8,16 @@ import "../styles/about.scss";
 class About extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      open: false
+    };
+    this.showModal = () => {
+      this.setState({ open: true });
+    };
+    this.closeModal = () => {
+      this.setState({ open: false });
+    };
   }
 
   render() {
@@ -48,8 +59,15 @@ class About extends Component {
             <br />
             <li>MongoDB/Mongoose</li>
             <br />
-            <li>My dog</li>
           </ul>
+          <EmailModal show={this.state.open} handleClose={this.closeModal} />
+          <button
+            className="contactButton"
+            type="button"
+            onClick={this.showModal}
+          >
+            Contact Me
+          </button>
         </div>
       </div>
     );
