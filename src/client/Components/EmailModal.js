@@ -54,7 +54,7 @@ const EmailModal = ({ handleClose, show }) => {
             size="40"
             required
           />
-          <input className="contactButton" type="submit" value="Submit" />
+          <input className="contactButton" type="submit" value="submit" />
           <button className="contactButton" onClick={handleClose}>
             Close
           </button>
