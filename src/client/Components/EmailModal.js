@@ -14,6 +14,7 @@ const EmailModal = ({ handleClose, show }) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
 
   const sendEmail = e => {
+    console.log(e);
     let name = e.target.name.value;
     let text = e.target.message.value;
 
@@ -41,11 +42,12 @@ const EmailModal = ({ handleClose, show }) => {
       <section className="modal-main">
         <form onSubmit={sendEmail} className="emailForm">
           <label htmlFor="email">Contact Email: </label>
-          <input type="email" name="name" size="14" required />
+          <input id="email" type="email" name="name" size="14" required />
 
-          <label htmlFor="text">Message: </label>
+          <label htmlFor="message">Message: </label>
           <input
             type="text"
+            id="message"
             name="message"
             minLength="0"
             maxLength="30"
