@@ -14,7 +14,6 @@ const EmailModal = ({ handleClose, show }) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
 
   const sendEmail = e => {
-    e.preventDefault();
     let name = e.target.name.value;
     let text = e.target.message.value;
 
@@ -28,11 +27,13 @@ const EmailModal = ({ handleClose, show }) => {
       .then(
         function(response) {
           alert("Message Sent");
+          handleClose();
         },
         function(error) {
           console.log("FAILED...", error);
         }
       );
+    e.preventDefault();
   };
 
   return (
