@@ -34,6 +34,7 @@ const EmailModal = ({ handleClose, show }) => {
           console.log("FAILED...", error);
         }
       );
+    e.preventDefault();
   };
 
   return (
