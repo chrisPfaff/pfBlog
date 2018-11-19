@@ -14,7 +14,7 @@ const EmailModal = ({ handleClose, show }) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
 
   const sendEmail = e => {
-    console.log(e);
+    e.preventDefault();
     let name = e.target.name.value;
     let text = e.target.message.value;
 
@@ -28,13 +28,11 @@ const EmailModal = ({ handleClose, show }) => {
       .then(
         function(response) {
           alert("Message Sent");
-          handleClose();
         },
         function(error) {
           console.log("FAILED...", error);
         }
       );
-    e.preventDefault();
   };
 
   return (
@@ -42,19 +40,18 @@ const EmailModal = ({ handleClose, show }) => {
       <section className="modal-main">
         <form onSubmit={sendEmail} className="emailForm">
           <label htmlFor="email">Contact Email: </label>
-          <input id="email" type="email" name="name" size="14" required />
+          <input type="email" name="name" size="14" required />
 
-          <label htmlFor="message">Message: </label>
+          <label htmlFor="text">Message: </label>
           <input
             type="text"
-            id="message"
             name="message"
             minLength="0"
             maxLength="30"
             size="40"
             required
           />
-          <input className="contactButton" type="submit" value="submit" />
+          <input className="contactButton" type="submit" value="Submit" />
           <button className="contactButton" onClick={handleClose}>
             Close
           </button>
