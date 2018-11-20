@@ -2,7 +2,13 @@
 
 .blogHeader {
   animation: 1.3s ease-out 0s 1 slideInFromTop;
-  background-color: white;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(170, 170, 170, 1) 51%,
+    rgba(255, 255, 255, 1) 100%
+  );
+
   border-bottom: solid black;
   border-top: solid black;
   color: #000000;
@@ -17,7 +23,7 @@
   padding-top: 10px;
   position: sticky;
   top: 0%;
-  width: 99%;
+  width: 100%;
 }
 
 @keyframes slideInFromTop {

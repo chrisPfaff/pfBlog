@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Header from "./Header";
-//import "../styles/line.scss";
+import "../styles/link.scss";
 
 class Links extends Component {
   constructor(props) {
@@ -8,7 +8,19 @@ class Links extends Component {
   }
 
   render() {
-    return <Header />;
+    return (
+      <div>
+        <Header />
+        <div className="linkContainer">
+          <p className="linkSectionTitle">My Links</p>
+          <ol className="linkList">
+            <li>
+              <a href="https://github.com/chrisPfaff">GitHub</a>
+            </li>
+          </ol>
+        </div>
+      </div>
+    );
   }
 }
 
