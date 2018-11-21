@@ -70,6 +70,11 @@ class Links extends Component {
                 different technologies)
               </a>
             </li>
+            <li>
+              <a href="http://pauljadam.com/wcag20checklist.html">
+                Accesibility Check-list
+              </a>
+            </li>
           </ol>
         </div>
       </div>
