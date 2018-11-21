@@ -10,7 +10,19 @@ class About extends Component {
     super(props);
 
     this.state = {
-      open: false
+      open: false,
+      skills: [
+        "HTML5",
+        "Javascript",
+        "CSS3/SCSS/SASS",
+        "React/ReactNative",
+        "Redux",
+        "Node",
+        "Webpack",
+        "Git",
+        "MongoDB/Mongoose",
+        "AWS"
+      ]
     };
     this.showModal = () => {
       this.setState({ open: true });
@@ -21,6 +33,16 @@ class About extends Component {
   }
 
   render() {
+    const skillsList = this.state.skills.map(item => {
+      return (
+        <div className="skillsList">
+          <ol>
+            <li>{item}</li>
+          </ol>
+        </div>
+      );
+    });
+
     return (
       <div>
         <Header />
@@ -40,26 +62,7 @@ class About extends Component {
             of years and many failures later I took a chance and quit my job to
             move to Austin to pursue a dream. Some of my skills include
           </p>
-          <ul className="skillsList">
-            <li>HTML5</li>
-            <br />
-            <li>Modern Javascript</li>
-            <br />
-            <li>CSS3/SCSS/SASS</li>
-            <br />
-            <li>React/ReactNative</li>
-            <br />
-            <li>Node</li>
-            <br />
-            <li>Webpack</li>
-            <br />
-            <li>Git</li>
-            <br />
-            <li>AWS</li>
-            <br />
-            <li>MongoDB/Mongoose</li>
-            <br />
-          </ul>
+          {skillsList}
           <EmailModal show={this.state.open} handleClose={this.closeModal} />
           <button
             className="contactButton"
