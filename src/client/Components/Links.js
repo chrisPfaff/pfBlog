@@ -66,8 +66,8 @@ class Links extends Component {
             </li>
             <li>
               <a href="https://medium.mybridge.co/@Mybridge">
-                @myBridge on medium.com (compiles best monthly articles of
-                different technologies)
+                @myBridge on medium.com ( compiles best monthly articles of
+                different technologies )
               </a>
             </li>
             <li>
