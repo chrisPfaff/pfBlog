@@ -14,3 +14,19 @@
 .linkList {
   padding: 20px;
 }
+
+.linkList li {
+  padding: 5px;
+}
+
+.linkList a {
+  text-decoration-line: none;
+  color: black;
+  font-size: 18px;
+  transition: font-size 3s;
+}
+
+.linkList a:hover {
+  cursor: pointer;
+  font-size: 24px;
+}
