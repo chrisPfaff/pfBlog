@@ -1,19 +1,19 @@
 @import url("https://fonts.googleapis.com/css?family=Asul:700");
 
 .aboutContainer {
-  text-align: center;
   padding: 50px;
+  text-align: center;
 }
 .aboutImage {
-  border: solid black;
   border-radius: 50px;
+  border: solid black;
   box-shadow: 2px 2px gray;
 }
 
 .aboutParagraph {
-  padding: 50px;
   font-family: "Asul", sans-serif;
   font-size: 20px;
+  padding: 50px;
 }
 
 .skillsList {

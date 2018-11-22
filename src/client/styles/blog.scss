@@ -7,10 +7,10 @@
 
 .blogDate {
   font-family: "Asul", sans-serif;
-  text-decoration-line: underline;
-  text-decoration-style: solid;
   font-size: 18px;
   padding: 10px;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
 }
 
 .blogPost {
@@ -18,16 +18,18 @@
 }
 
 .blogText {
-  box-shadow: 10px 5px 5px black;
   background-color: gray;
-  padding: 20px;
+  box-shadow: 10px 5px 5px black;
+  line-height: 18px;
   margin-bottom: 10px;
+  padding: 20px;
 }
 
 .blogText p {
-  padding: 10px;
   background-color: white;
   font-family: "Asul", sans-serif;
+  padding: 10px;
+  text-indent: 5%;
 }
 
 .codeSandBox {

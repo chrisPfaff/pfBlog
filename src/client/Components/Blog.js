@@ -28,9 +28,13 @@ class Blog extends Component {
           </section>
           <section className="blogText">
             <p>
-              Even though es6 classes are just syntatic sugar on top of the old
+              Even though es6 classes are just syntactic sugar on top of the old
               OOP practices in JS, I still find it to be easier to understand
-              than older methods.
+              than older methods. In this example above instead of using a
+              constructor function one can create a class with using the class
+              keyword. Like a constructor function you still have to use the
+              this keyword to assign properties to the whatever variable is
+              passed in the constructor.
             </p>
           </section>
           <h2 className="blogDate">Nov 10 2018</h2>
