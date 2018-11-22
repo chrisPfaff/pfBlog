@@ -30,9 +30,7 @@ class Blog extends Component {
             <p>
               Even though es6 classes are just syntatic sugar on top of the old
               OOP practices in JS, I still find it to be easier to understand
-              than older methods. Even though es6 classes are just syntatic
-              sugar on top of the old OOP practices in JS, I still find it to be
-              easier to understand than older methods.
+              than older methods.
             </p>
           </section>
           <h2 className="blogDate">Nov 10 2018</h2>
