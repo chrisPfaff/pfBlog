@@ -75,6 +75,9 @@ class Links extends Component {
                 Accesibility Check-list
               </a>
             </li>
+            <li>
+              <a href="https://babeljs.io/docs/en/">Babel docs</a>
+            </li>
           </ol>
         </div>
       </div>

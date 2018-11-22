@@ -12,33 +12,31 @@ class Blog extends Component {
       <div>
         <Header />
         <div className="blogContainer">
-          <h2 className="date">Nov 13 2018</h2>
-          <h2>es6 classes</h2>
+          <h2 className="blogDate">Nov 13 2018</h2>
+          <h2 className="blogPost">es6 classes</h2>
           <section className="codeSandBox">
             <iframe
-              height="400px"
-              width="70%"
-              src="https://repl.it/@chrispfaff/OvalFuchsiaHack?lite=true"
+              height="400"
+              width="600"
               scrolling="no"
+              title="XyEpax"
+              src="//codepen.io/ChrisPfaff10/embed/XyEpax/?height=265&theme-id=dark&default-tab=js"
               frameborder="no"
               allowtransparency="true"
               allowfullscreen="true"
-              sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"
             />
           </section>
-          <h2 className="date">Nov 10 2018</h2>
-          <section className="codeSandBox">
-            <iframe
-              height="400px"
-              width="70%"
-              src="https://repl.it/@chrispfaff/OvalFuchsiaHack?lite=true"
-              scrolling="no"
-              frameborder="no"
-              allowtransparency="true"
-              allowfullscreen="true"
-              sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"
-            />
+          <section className="blogText">
+            <p>
+              Even though es6 classes are just syntatic sugar on top of the old
+              OOP practices in JS, I still find it to be easier to understand
+              than older methods. Even though es6 classes are just syntatic
+              sugar on top of the old OOP practices in JS, I still find it to be
+              easier to understand than older methods.
+            </p>
           </section>
+          <h2 className="blogDate">Nov 10 2018</h2>
+          <section className="codeSandBox" />
         </div>
       </div>
     );

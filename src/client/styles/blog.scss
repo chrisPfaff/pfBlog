@@ -5,10 +5,29 @@
   padding: 50px;
 }
 
-.date {
+.blogDate {
   font-family: "Asul", sans-serif;
   text-decoration-line: underline;
   text-decoration-style: solid;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.blogPost {
+  font-family: "Asul", sans-serif;
+}
+
+.blogText {
+  box-shadow: 10px 5px 5px black;
+  background-color: gray;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.blogText p {
+  padding: 10px;
+  background-color: white;
+  font-family: "Asul", sans-serif;
 }
 
 .codeSandBox {
