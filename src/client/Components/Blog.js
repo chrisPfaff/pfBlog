@@ -41,6 +41,7 @@ class Blog extends Component {
             </p>
           </section>
           <h2 className="blogDate">Nov 10 2018</h2>
+          <h2 className="blogPost">Async Await</h2>
           <section className="codeSandBox" />
         </div>
       </div>
