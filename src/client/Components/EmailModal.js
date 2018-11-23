@@ -37,20 +37,27 @@ const EmailModal = ({ handleClose, show }) => {
 
   return (
     <div className={showHideClassName}>
-      <section className="modal-main">
+      <section className="modalMain">
         <form onSubmit={sendEmail} className="emailForm">
-          <label htmlFor="email">Contact Email: </label>
-          <input type="email" name="name" size="14" required />
-
-          <label htmlFor="text">Message: </label>
-          <input
-            type="text"
-            name="message"
-            minLength="0"
-            maxLength="30"
-            size="40"
-            required
-          />
+          <div>
+            <label className="labels" htmlFor="email">
+              Contact Email:{" "}
+            </label>
+            <input type="email" name="name" size="15" required />
+          </div>
+          <div>
+            <label className="labels" htmlFor="text">
+              Message:{" "}
+            </label>
+            <input
+              type="text-area"
+              name="message"
+              minLength="0"
+              maxLength="1000"
+              size="40"
+              required
+            />
+          </div>
           <input className="contactButton" type="submit" value="Submit" />
           <button className="contactButton" onClick={handleClose}>
             Close

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Asul:700");
+
 .modal {
   background: rgba(0, 0, 0, 0.6);
   height: 100%;
@@ -6,7 +8,10 @@
   top: 0;
   width: 100%;
 
-  .modal-main {
+  .modalMain {
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
     background: white;
     height: auto;
     left: 50%;
@@ -15,6 +20,10 @@
     transform: translate(-50%, -50%);
     width: 80%;
   }
+}
+
+.modalMain div {
+  padding: 5px;
 }
 
 .display-block {
@@ -26,6 +35,7 @@
 }
 
 .contactButton {
+  font-family: "Asul", sans-serif;
   background-color: black;
   border: 1px solid black;
   color: white;
@@ -41,4 +51,11 @@
 
 .emailForm {
   margin: 10px;
+  padding: 20px;
+  font-family: "Asul", sans-serif;
+}
+
+.labels {
+  padding: 10px;
+  text-decoration: underline;
 }
