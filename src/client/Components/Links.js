@@ -22,6 +22,11 @@ class Links extends Component {
                 Resume
               </a>
             </li>
+            <li>
+              <a href="https://www.npmjs.com/package/coinpricecli">
+                A Cli I Built
+              </a>
+            </li>
           </ol>
           <p className="linkSectionTitle">Favorite Dev Links</p>
           <ol className="linkList">
