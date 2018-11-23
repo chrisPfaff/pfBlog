@@ -18,10 +18,13 @@ class About extends Component {
         "React/ReactNative",
         "Redux",
         "Node",
+        "Express",
         "Webpack",
         "Git",
         "MongoDB/Mongoose",
-        "AWS"
+        "AWS",
+        "Knowledge of ADA compliance",
+        "API design knowledge"
       ]
     };
     this.showModal = () => {
