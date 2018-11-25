@@ -9,7 +9,7 @@ class Header extends Component {
       <div className="blogHeader">
         <h1>
           <Link to="/" className="link">
-            Pflog
+            Christopher Pfaff
           </Link>
         </h1>
       </div>
