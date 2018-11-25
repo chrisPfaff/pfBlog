@@ -29,7 +29,7 @@ class Links extends Component {
             </li>
             <li>
               <a href="https://zeit.co/christopherpfaff/reactvideo/chahjo22n">
-                React Video
+                React Video (A youtube clone built in react)
               </a>
             </li>
           </ol>
