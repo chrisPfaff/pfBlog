@@ -27,6 +27,11 @@ class Links extends Component {
                 A Cli I Built
               </a>
             </li>
+            <li>
+              <a href="https://zeit.co/christopherpfaff/reactvideo/chahjo22n">
+                React Video
+              </a>
+            </li>
           </ol>
           <p className="linkSectionTitle">Favorite Dev Links</p>
           <ol className="linkList">
