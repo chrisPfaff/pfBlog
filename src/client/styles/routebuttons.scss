@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Asul:700");
+
 .routeButtons {
   animation: 1.8s ease 0s 1 slideInFromBottomButtons;
   text-align: center;
@@ -8,6 +10,7 @@
   color: white;
   border: 1px solid black;
   cursor: pointer;
+  font-family: "Asul", sans-serif;
   padding: 10px 40px;
 }
 
