@@ -18,9 +18,7 @@ class Links extends Component {
               <a href="https://github.com/chrisPfaff">GitHub</a>
             </li>
             <li>
-              <a href="https://github.com/chrisPfaff/resume/blob/master/Christopher%20Pfaff%20resume%20TX.PDF">
-                Resume
-              </a>
+              <a href="https://resume10.herokuapp.com/">Resume</a>
             </li>
             <li>
               <a href="https://www.npmjs.com/package/coinpricecli">
