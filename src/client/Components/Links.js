@@ -6,9 +6,54 @@ import "../styles/link.scss";
 class Links extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      links: [
+        ["https://nodeschool.io/#workshoppers", "NodeSchool"],
+        ["https://eloquentjavascript.net/", "Eloquent JS"],
+        [
+          "http://www.pythontutor.com/javascript.html#mode=edit",
+          "Python Tutor (great for visualizing code)"
+        ],
+        ["https://javascript.info/", "Javascript.info"],
+        ["http://reactivex.io/learnrx/", "Functional Programming in JS"],
+        [
+          "http://javascriptissexy.com/oop-in-javascript-what-you-need-to-know/",
+          "Pre-es6 OOP in JS"
+        ],
+        [
+          "https://www.sitepoint.com/object-oriented-javascript-deep-dive-es6-classes/",
+          "es6 classes"
+        ],
+        [
+          "https://medium.com/@learningdollars/15-tools-that-help-learners-make-sense-of-professional-source-code-71767ac8036e",
+          "15 best dev tools"
+        ],
+        [
+          "https://medium.com/@thejasonfile/basic-intro-to-react-router-v4-a08ae1ba5c42",
+          "Intro to React Router v4"
+        ],
+        [
+          "https://medium.mybridge.co/@Mybridge",
+          "@myBridge on medium.com ( compiles best monthly articles of different technologies )"
+        ],
+        [
+          "http://pauljadam.com/wcag20checklist.html",
+          "Accesibility Check-list"
+        ],
+        ["https://babeljs.io/docs/en/", "Babel docs"]
+      ]
+    };
   }
 
   render() {
+    const devLinks = this.state.links.map(item => {
+      return (
+        <li>
+          <FaLink />
+          <a href={item[0]}>{item[1]}</a>
+        </li>
+      );
+    });
     return (
       <div>
         <Header />
@@ -37,73 +82,7 @@ class Links extends Component {
             </li>
           </ol>
           <p className="linkSectionTitle">Favorite Dev Links</p>
-          <ol className="linkList">
-            <li>
-              <FaLink />
-              <a href="https://nodeschool.io/#workshoppers">NodeSchool</a>
-            </li>
-            <li>
-              <FaLink />
-              <a href="https://eloquentjavascript.net/">Eloquent JS</a>
-            </li>
-            <li>
-              <FaLink />
-              <a href="http://www.pythontutor.com/javascript.html#mode=edit">
-                Python Tutor (great for visualizing code)
-              </a>
-            </li>
-            <li>
-              <FaLink />
-              <a href="https://javascript.info/">Javascript.info</a>
-            </li>
-            <li>
-              <FaLink />
-              <a href="http://reactivex.io/learnrx/">
-                Functional Programming in JS
-              </a>
-            </li>
-            <li>
-              <FaLink />
-              <a href="http://javascriptissexy.com/oop-in-javascript-what-you-need-to-know/">
-                Pre-es6 OOP in JS
-              </a>
-            </li>
-            <li>
-              <FaLink />
-              <a href="https://www.sitepoint.com/object-oriented-javascript-deep-dive-es6-classes/">
-                es6 classes
-              </a>
-            </li>
-            <li>
-              <FaLink />
-              <a href="https://medium.com/@learningdollars/15-tools-that-help-learners-make-sense-of-professional-source-code-71767ac8036e">
-                15 best dev tools
-              </a>
-            </li>
-            <li>
-              <FaLink />
-              <a href="https://medium.com/@thejasonfile/basic-intro-to-react-router-v4-a08ae1ba5c42">
-                Intro to React Router v4
-              </a>
-            </li>
-            <li>
-              <FaLink />
-              <a href="https://medium.mybridge.co/@Mybridge">
-                @myBridge on medium.com ( compiles best monthly articles of
-                different technologies )
-              </a>
-            </li>
-            <li>
-              <FaLink />
-              <a href="http://pauljadam.com/wcag20checklist.html">
-                Accesibility Check-list
-              </a>
-            </li>
-            <li>
-              <FaLink />
-              <a href="https://babeljs.io/docs/en/">Babel docs</a>
-            </li>
-          </ol>
+          <ol className="linkList">{devLinks}</ol>
         </div>
       </div>
     );
