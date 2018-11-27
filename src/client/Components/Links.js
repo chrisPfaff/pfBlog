@@ -80,6 +80,12 @@ class Links extends Component {
                 React Video (A youtube clone built in react)
               </a>
             </li>
+            <li>
+              <FaCode />
+              <a href="https://baseball-landing.herokuapp.com/">
+                LandingPage for fictional baseball team
+              </a>
+            </li>
           </ol>
           <p className="linkSectionTitle">Favorite Dev Links</p>
           <ol className="linkList">{devLinks}</ol>
