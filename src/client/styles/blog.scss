@@ -35,3 +35,10 @@
 .codeSandBox {
   padding: 10px;
 }
+
+@media only screen and (max-width: 368px) {
+  .codeSandBox {
+    height: 200px;
+    width: 200px;
+  }
+}
