@@ -82,6 +82,12 @@ class Links extends Component {
             </li>
             <li>
               <FaCode />
+              <a href="https://simple-crud-node.herokuapp.com/">
+                A CRUD App built with node and ejs (no persistent memory)
+              </a>
+            </li>
+            <li>
+              <FaCode />
               <a href="https://baseball-landing.herokuapp.com/">
                 LandingPage for fictional baseball team
               </a>
