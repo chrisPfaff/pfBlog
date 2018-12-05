@@ -16,8 +16,6 @@ class Blog extends Component {
           <h2 className="blogPost">es6 classes</h2>
           <section className="codeSandBox">
             <iframe
-              height="400"
-              width="600"
               scrolling="no"
               title="XyEpax"
               src="//codepen.io/ChrisPfaff10/embed/XyEpax/?height=265&theme-id=dark&default-tab=js"
