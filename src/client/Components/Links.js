@@ -94,6 +94,12 @@ class Links extends Component {
             </li>
             <li>
               <FaCode />
+              <a href="https://claires-gallery.herokuapp.com/">
+                Gallery landing page (built using vanillaJS)
+              </a>
+            </li>
+            <li>
+              <FaCode />
               <a href="https://dog-messenger.herokuapp.com/">
                 Basic App that sends you a picture of a dog
               </a>
