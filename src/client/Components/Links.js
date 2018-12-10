@@ -40,7 +40,8 @@ class Links extends Component {
           "http://pauljadam.com/wcag20checklist.html",
           "Accesibility Check-list"
         ],
-        ["https://babeljs.io/docs/en/", "Babel docs"]
+        ["https://babeljs.io/docs/en/", "Babel docs"],
+        ["https://parceljs.org/", "Parcel (low stress bundler)"]
       ]
     };
   }
