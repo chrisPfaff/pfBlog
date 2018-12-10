@@ -23,11 +23,17 @@
   text-decoration-line: none;
   color: black;
   font-size: 18px;
-  transition: font-size 3s;
   padding-left: 10px;
 }
 
 .linkList a:hover {
+  cursor: pointer;
+}
+.devLinks {
+  transition: font-size 3s;
+}
+
+.devLinks:hover {
   cursor: pointer;
   font-size: 24px;
 }

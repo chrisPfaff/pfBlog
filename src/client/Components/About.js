@@ -3,8 +3,6 @@ import Header from "./Header";
 import EmailModal from "./EmailModal";
 import "../styles/about.scss";
 
-//import "../styles/line.scss";
-
 class About extends Component {
   constructor(props) {
     super(props);

@@ -2,14 +2,6 @@ import React, { Component } from "react";
 import "../styles/emailmodal.scss";
 const emailjs = require("emailjs-com");
 
-//"gmail.com"
-//template_xnRFI8hB
-//user id // user_IphnBP661H4pspiSgLyAf
-
-//emailjs.sendForm(serviceID, templateID, form, userID);
-
-//emailjs.send("gmail", "template_xnRFI8hB", {"name":"greg@gmail.com","message":"call //me asap"})
-
 const EmailModal = ({ handleClose, show }) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
 

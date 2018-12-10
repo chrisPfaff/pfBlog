@@ -1,0 +1,27 @@
+.linkBox {
+  border: solid;
+  display: grid;
+  margin: 30px;
+}
+
+.linkImg {
+  border: solid;
+  padding: 1px;
+  margin: 10px;
+  height: 300px;
+  width: 450px;
+}
+
+@media only screen and (max-width: 755px) {
+  .linkImg {
+    height: 150px;
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 577px) {
+  .linkImg {
+    height: 100px;
+    width: 100px;
+  }
+}
