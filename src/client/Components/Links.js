@@ -42,7 +42,11 @@ class Links extends Component {
           "Accesibility Check-list"
         ],
         ["https://babeljs.io/docs/en/", "Babel docs"],
-        ["https://parceljs.org/", "Parcel (low stress bundler)"]
+        ["https://parceljs.org/", "Parcel (low stress bundler)"],
+        [
+          "https://www.valentinog.com/blog/react-webpack-babel/",
+          "Setup React, Webpack, Babel 7 quick guide"
+        ]
       ],
       myLinks: [
         [
