@@ -70,7 +70,7 @@ class Links extends Component {
         ],
         [
           "src/client/img/reactvideo.png",
-          "https://reactvideo-chahjo22n.now.sh/",
+          "https://reactvideo-e7y2dobcr.now.sh/",
           "React Video (A youtube clone built in react)",
           <FaCode />
         ],
