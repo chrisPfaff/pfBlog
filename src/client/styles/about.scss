@@ -5,7 +5,7 @@
   text-align: center;
 }
 .aboutImage {
-  border-radius: 50px;
+  border-radius: 7px;
   border: solid black;
   box-shadow: 2px 2px gray;
 }
@@ -35,13 +35,23 @@
   font-size: 30px;
 }
 
-@media only screen and (max-width: 368px) {
+@media only screen and (max-width: 512px) {
   .aboutContainer {
     padding: 30px;
     text-align: center;
   }
   .aboutImage {
-    border-radius: 50px;
+    border: solid black;
+    box-shadow: 2px 2px gray;
+  }
+}
+
+@media only screen and (max-width: 512px) {
+  .aboutContainer {
+    padding: 10px;
+    text-align: center;
+  }
+  .aboutImage {
     border: solid black;
     box-shadow: 2px 2px gray;
   }
