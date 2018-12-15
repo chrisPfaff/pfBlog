@@ -16,10 +16,11 @@
 
 .routeButtons .link:not(:last-child) {
   border-right: none;
+  border-left: none;
 }
 
 .routeButtons .link:hover {
-  background-color: white;
+  background-color: white
   color: black;
 }
 
