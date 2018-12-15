@@ -1,21 +1,33 @@
 .linkBox {
-  border: solid;
   display: grid;
   margin: 30px;
 }
 
+.linkBox span {
+  font-size: 24px;
+}
 .linkImg {
-  border: solid;
-  padding: 1px;
-  margin: 10px;
+  margin-bottom: 30px;
   height: 300px;
   width: 450px;
+  border: solid black;
+  padding: 20px;
+  border-radius: 7px;
+  -webkit-box-shadow: 0em 0.2em 0em inset;
+  -moz-box-shadow: 0em 0.2em 0em inset;
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.46);
 }
 
 @media only screen and (max-width: 755px) {
   .linkImg {
     height: 150px;
     width: 300px;
+    border: solid black;
+    padding: 20px;
+    border-radius: 7px;
+    -webkit-box-shadow: 0em 0.2em 0em inset;
+    -moz-box-shadow: 0em 0.2em 0em inset;
+    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.46);
   }
 }
 
@@ -23,5 +35,11 @@
   .linkImg {
     height: 100px;
     width: 100px;
+    border: solid black;
+    padding: 20px;
+    border-radius: 7px;
+    -webkit-box-shadow: 0em 0.2em 0em inset;
+    -moz-box-shadow: 0em 0.2em 0em inset;
+    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.46);
   }
 }
