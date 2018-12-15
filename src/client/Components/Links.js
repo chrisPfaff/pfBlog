@@ -122,7 +122,7 @@ class Links extends Component {
         <div className="linkContainer">
           <p className="linkSectionTitle">My Links</p>
           {myLinks}
-          <p className="linkSectionTitle">Favorite Dev Links</p>
+          <p className="linkSectionTitleDev">Favorite Dev Links</p>
           {devLinks}
         </div>
       </div>

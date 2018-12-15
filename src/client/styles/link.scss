@@ -7,12 +7,25 @@
 
 .linkSectionTitle {
   font-family: "Asul", sans-serif;
-  font-size: 20px;
+  font-size: 30px;
+  text-decoration-line: underline;
+}
+
+.linkSectionTitleDev {
+  padding: 40px 0 20px 0;
+  font-family: "Asul", sans-serif;
+  font-size: 30px;
   text-decoration-line: underline;
 }
 
 .devLinks {
+  list-style-type: none;
+  padding: 10px;
   transition: font-size 3s;
+  text-decoration-line: none;
+  color: black;
+  font-size: 18px;
+  padding-left: 10px;
 }
 
 .devLinks:hover {
