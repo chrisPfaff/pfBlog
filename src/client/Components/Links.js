@@ -121,9 +121,9 @@ class Links extends Component {
         <Header />
         <div className="linkContainer">
           <p className="linkSectionTitle">My Links</p>
-          <ol className="linkList">{myLinks}</ol>
+          {myLinks}
           <p className="linkSectionTitle">Favorite Dev Links</p>
-          <ol className="linkList">{devLinks}</ol>
+          {devLinks}
         </div>
       </div>
     );

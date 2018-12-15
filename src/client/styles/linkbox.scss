@@ -1,6 +1,6 @@
 .linkBox {
-  display: grid;
-  margin: 30px;
+  text-align: center;
+  padding-top: 30px;
 }
 
 .linkBox span {
@@ -18,6 +18,16 @@
   box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.46);
 }
 
+.linkBox a {
+  text-decoration-line: none;
+  color: black;
+  font-size: 18px;
+  padding-left: 10px;
+}
+
+.linkBox a:hover {
+  cursor: pointer;
+}
 @media only screen and (max-width: 755px) {
   .linkImg {
     height: 250px;
