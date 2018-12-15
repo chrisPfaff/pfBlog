@@ -10,19 +10,21 @@ class About extends Component {
     this.state = {
       open: false,
       skills: [
-        "HTML5",
-        "Javascript",
-        "CSS3/SCSS/SASS",
-        "React/ReactNative",
-        "Redux",
-        "Node",
-        "Express",
-        "Webpack",
-        "Git",
-        "MongoDB/Mongoose",
-        "AWS",
-        "Knowledge of ADA compliance",
-        "API design knowledge"
+        ["src/client/img/html5.svg", "HTML5"],
+        ["src/client/img/javascript.svg", "Javascript"],
+        ["src/client/img/css.svg", "CSS3"],
+        ["src/client/img/sass.svg", "SASS/SCSS"],
+        ["src/client/img/react.svg", "React/ReactNative"],
+        ["src/client/img/redux.svg", "Redux"],
+        ["src/client/img/node.svg", "Node"],
+        ["src/client/img/express.svg", "Express"],
+        ["src/client/img/webpack.svg", "Webpack"],
+        ["src/client/img/git.svg", "Git"],
+        ["src/client/img/mongodb.svg", "MongoDB"],
+        ["src/client/img/mongoose.png", "Mongoose"],
+        ["src/client/img/aws.svg", "AWS"],
+        ["src/client/img/ada.png", "Knowledge of ADA compliance"],
+        ["src/client/img/api.png", "API design knowledge"]
       ]
     };
     this.showModal = () => {
@@ -38,7 +40,14 @@ class About extends Component {
       return (
         <div className="skillsList">
           <ol>
-            <li>{item}</li>
+            <img
+              className="skillsImg"
+              src={item[0]}
+              height="200"
+              width="250"
+              alt="logo"
+            />
+            <li>{item[1]}</li>
           </ol>
         </div>
       );

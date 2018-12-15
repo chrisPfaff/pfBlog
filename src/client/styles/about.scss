@@ -21,8 +21,18 @@
   font-size: 15px;
 }
 
+.skillsImg {
+  border: solid black;
+  padding: 20px;
+  border-radius: 7px;
+  -webkit-box-shadow: 0em 0.2em 0em inset;
+  -moz-box-shadow: 0em 0.2em 0em inset;
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.46);
+}
+
 .skillsList li {
-  padding: 5px;
+  padding: 20px;
+  font-size: 30px;
 }
 
 @media only screen and (max-width: 368px) {
