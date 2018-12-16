@@ -1,5 +1,5 @@
 {
   "version": 2,
   "alias": ["www.christopherpfaff.com"],
-  "builds": [{ "src": "index.html", "use": "@now/static" }]
+  "builds": [{ "src": "*.html", "use": "@now/static" }]
 }
