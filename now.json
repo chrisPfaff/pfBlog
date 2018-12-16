@@ -1,12 +1,21 @@
+// {
+//   "alias": ["www.christopherpfaff.com"],
+//   "type": "static",
+//   "static": {
+//     "rewrites": [
+//       {
+//         "source": "**",
+//         "destination": "/index.html"
+//       }
+//     ]
+//   }
+// }
+
 {
+  "version": 2,
   "alias": ["www.christopherpfaff.com"],
-  "type": "static",
-  "static": {
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
+  "builds": [
+    { "src": "bundle.js", "use": "@now/node" },
+    { "src": "index.html", "use": "@now/static" }
+  ]
 }
