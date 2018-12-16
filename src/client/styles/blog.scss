@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Asul:700");
+@import url("https://fonts.googleapis.com/css?family=Lusitana");
 
 .blogContainer {
   display: flex;
@@ -9,7 +9,7 @@
 
 .blogDate {
   padding-top: 20px;
-  font-family: "Asul", sans-serif;
+  font-family: "Lusitana", serif;
   font-size: 18px;
   text-decoration-line: underline;
   text-decoration-style: solid;
@@ -17,7 +17,7 @@
 
 .blogPost {
   padding-top: 10px;
-  font-family: "Asul", sans-serif;
+  font-family: "Lusitana", serif;
 }
 
 .blogText {
@@ -36,8 +36,9 @@
 
 .blogText p {
   padding: 20px;
+  line-height: 24px;
   background-color: white;
-  font-family: "Asul", sans-serif;
+  font-family: "Lusitana", serif;
   text-indent: 5%;
 }
 

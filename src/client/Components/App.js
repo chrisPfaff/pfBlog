@@ -16,13 +16,13 @@ const App = () => (
     <Line />
     <div className="routeButtons">
       <Link to="/blog" className="link">
-        Blog
+        {`{ Blog }`}
       </Link>
       <Link to="/about" className="link">
-        About
+        {`{ About }`}
       </Link>
       <Link to="/links" className="link">
-        Links
+        {`{ Links }`}
       </Link>
     </div>
   </div>
