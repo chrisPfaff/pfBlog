@@ -4,16 +4,6 @@
 .blogHeader {
   animation: 1.3s ease-out 0s 1 slideInFromTop;
   background: rgb(255, 255, 255);
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(176, 176, 176, 1) 28%,
-    rgba(127, 127, 127, 1) 47%,
-    rgba(89, 89, 89, 1) 67%,
-    rgba(70, 70, 70, 1) 79%,
-    rgba(0, 0, 0, 1) 100%
-  );
-
   border-bottom: solid black;
   border-top: solid black;
   color: #000000;
@@ -22,7 +12,6 @@
   //font-family: "Varela Round", sans-serif;
   // font-family: "Asul", sans-serif;
   font-family: "Raleway", sans-serif;
-
   font-size: 55px;
   height: 80px;
   justify-content: center;
@@ -49,13 +38,6 @@
 @media only screen and (max-width: 670px) {
   .blogHeader {
     animation: 1.3s ease-out 0s 1 slideInFromTop;
-    background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(170, 170, 170, 1) 51%,
-      rgba(255, 255, 255, 1) 100%
-    );
-
     border-bottom: solid black;
     border-top: solid black;
     color: #000000;
@@ -78,13 +60,6 @@
 @media only screen and (max-width: 411px) {
   .blogHeader {
     animation: 1.3s ease-out 0s 1 slideInFromTop;
-    background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(170, 170, 170, 1) 51%,
-      rgba(255, 255, 255, 1) 100%
-    );
-
     border-bottom: solid black;
     border-top: solid black;
     color: #000000;

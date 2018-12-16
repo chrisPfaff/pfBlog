@@ -2,7 +2,11 @@
 
 .aboutContainer {
   padding: 50px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .aboutImage {
   border-radius: 7px;
@@ -20,6 +24,12 @@
 .skillsList {
   font-family: "Lusitana", serif;
   font-size: 15px;
+  background-color: white;
+  border-radius: 7px;
+  border: solid black;
+  padding: 20px;
+  margin: 20px;
+  width: 300px;
 }
 
 .skillsImg {

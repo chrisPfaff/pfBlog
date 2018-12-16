@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "./Header";
 import { FaGithub, FaNewspaper, FaCode, FaLink } from "react-icons/fa";
 import LinkBox from "./LinkBox";
+
 import "../styles/link.scss";
 
 class Links extends Component {
@@ -53,50 +54,58 @@ class Links extends Component {
           "src/client/img/github.png",
           "https://github.com/chrisPfaff",
           "GitHub",
-          <FaGithub />
+          <FaGithub />,
+          "right"
         ],
         [
           "src/client/img/resume.png",
           "https://resume10.herokuapp.com/",
           "Resume",
-          <FaNewspaper />
+          <FaNewspaper />,
+          "left"
         ],
         [
           "src/client/img/cli.png",
           "https://www.npmjs.com/package/coinpricecli",
           `A command line interface that I built that fetch's current
           crypto currency data`,
-          <FaCode />
+          <FaCode />,
+          "right"
         ],
         [
           "src/client/img/reactvideo.png",
           "https://reactvideo-e7y2dobcr.now.sh/",
           "React Video (A youtube clone built in react)",
-          <FaCode />
+          <FaCode />,
+          "left"
         ],
         [
           "src/client/img/nodecrud.png",
           "https://simple-crud-node.herokuapp.com//",
           "A CRUD App built with node and ejs (no persistent memory)",
-          <FaCode />
+          <FaCode />,
+          "right"
         ],
         [
           "src/client/img/baseball.png",
           "https://baseball-landing.herokuapp.com/",
           "LandingPage for fictional baseball team",
-          <FaCode />
+          <FaCode />,
+          "left"
         ],
         [
           "src/client/img/art.png",
           "https://claires-gallery.herokuapp.com/",
           "Gallery landing page (built using vanillaJS)",
-          <FaCode />
+          <FaCode />,
+          "right"
         ],
         [
           "src/client/img/dogmessanger.png",
           "https://dog-messenger.herokuapp.com/",
           "Basic App that sends you a picture of a dog",
-          <FaCode />
+          <FaCode />,
+          "left"
         ]
       ]
     };
@@ -116,6 +125,7 @@ class Links extends Component {
     const myLinks = this.state.myLinks.map(item => {
       return <LinkBox data={item} />;
     });
+
     return (
       <div>
         <Header />

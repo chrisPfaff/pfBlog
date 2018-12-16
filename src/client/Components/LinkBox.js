@@ -1,13 +1,25 @@
 import React, { Component } from "react";
+import AOS from "aos";
+
 import "../styles/linkbox.scss";
+import "../styles/aos.css";
 
 class LinkBox extends Component {
   constructor(props) {
     super();
   }
+
+  componentDidMount() {
+    AOS.init();
+  }
+
+  componentWillReceiveProps() {
+    AOS.refresh();
+  }
+
   render() {
     return (
-      <div className="linkBox">
+      <div className="linkBox" data-aos={"fade-" + this.props.data[4]}>
         <ol>
           <li>
             <a href={this.props.data[1]}>
