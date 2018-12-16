@@ -1,5 +1,12 @@
 {
-  "version": 2,
   "alias": ["www.christopherpfaff.com"],
-  "builds": [{ "src": "*.html", "use": "@now/static" }]
+  "type": "static",
+  "static": {
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }
