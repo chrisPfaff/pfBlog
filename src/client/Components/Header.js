@@ -9,7 +9,7 @@ class Header extends Component {
       <div className="blogHeader">
         <h1>
           <Link to="/" className="link">
-            Christopher Pfaff
+            {`< ChristopherPfaff / >`}
           </Link>
         </h1>
       </div>

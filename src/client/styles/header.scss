@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Asul:700");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Varela+Round");
 
 .blogHeader {
   animation: 1.3s ease-out 0s 1 slideInFromTop;
@@ -13,11 +15,13 @@
   border-top: solid black;
   color: #000000;
   display: flex;
-  font-family: "Asul", sans-serif;
+  //font-family: "Roboto", sans-serif;
+  font-family: "Varela Round", sans-serif;
+  // font-family: "Asul", sans-serif;
   font-size: 55px;
   height: 80px;
   justify-content: center;
-  letter-spacing: 6px;
+  letter-spacing: 4px;
   margin: 0 auto;
   padding-top: 10px;
   position: sticky;
@@ -36,7 +40,7 @@
   }
 }
 
-@media only screen and (max-width: 590px) {
+@media only screen and (max-width: 670px) {
   .blogHeader {
     animation: 1.3s ease-out 0s 1 slideInFromTop;
     background: linear-gradient(
@@ -65,7 +69,7 @@
   }
 }
 
-@media only screen and (max-width: 368px) {
+@media only screen and (max-width: 411px) {
   .blogHeader {
     animation: 1.3s ease-out 0s 1 slideInFromTop;
     background: linear-gradient(
@@ -80,8 +84,8 @@
     color: #000000;
     display: flex;
     font-family: "Asul", sans-serif;
-    font-size: 15px;
-    height: 20px;
+    font-size: 20px;
+    height: 27px;
     justify-content: center;
     letter-spacing: 6px;
     margin: 0 auto;
