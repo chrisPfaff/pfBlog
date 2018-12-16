@@ -1,30 +1,35 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import EmailModal from "./EmailModal";
+import AOS from "aos";
+
 import "../styles/about.scss";
+import "../styles/aos.css";
 
 class About extends Component {
   constructor(props) {
     super(props);
 
+    AOS.init();
+
     this.state = {
       open: false,
       skills: [
-        ["src/client/img/html5.svg", "HTML5"],
-        ["src/client/img/javascript.svg", "Javascript"],
-        ["src/client/img/css.svg", "CSS3"],
-        ["src/client/img/sass.svg", "SASS/SCSS"],
-        ["src/client/img/react.svg", "React/ReactNative"],
-        ["src/client/img/redux.svg", "Redux"],
-        ["src/client/img/node.svg", "Node"],
-        ["src/client/img/express.svg", "Express"],
-        ["src/client/img/webpack.svg", "Webpack"],
-        ["src/client/img/git.svg", "Git"],
-        ["src/client/img/mongodb.svg", "MongoDB"],
-        ["src/client/img/mongoose.png", "Mongoose"],
-        ["src/client/img/aws.svg", "AWS"],
-        ["src/client/img/ada.png", "Knowledge of ADA compliance"],
-        ["src/client/img/api.png", "API design knowledge"]
+        ["src/client/img/html5.svg", "HTML5", "left"],
+        ["src/client/img/javascript.svg", "Javascript", "right"],
+        ["src/client/img/css.svg", "CSS3", "left"],
+        ["src/client/img/sass.svg", "SASS/SCSS", "right"],
+        ["src/client/img/react.svg", "React/ReactNative", "left"],
+        ["src/client/img/redux.svg", "Redux", "right"],
+        ["src/client/img/node.svg", "Node", "left"],
+        ["src/client/img/express.svg", "Express", "left"],
+        ["src/client/img/webpack.svg", "Webpack", "right"],
+        ["src/client/img/git.svg", "Git", "left"],
+        ["src/client/img/mongodb.svg", "MongoDB", "right"],
+        ["src/client/img/mongoose.png", "Mongoose", "left"],
+        ["src/client/img/aws.svg", "AWS", "right"],
+        ["src/client/img/ada.png", "Knowledge of ADA compliance", "left"],
+        ["src/client/img/api.png", "API design knowledge", "right"]
       ]
     };
     this.showModal = () => {
@@ -35,12 +40,21 @@ class About extends Component {
     };
   }
 
+  componentDidMount() {
+    AOS.init();
+  }
+
+  componentWillReceiveProps() {
+    AOS.refresh();
+  }
+
   render() {
     const skillsList = this.state.skills.map(item => {
       return (
         <div className="skillsList">
           <ol>
             <img
+              data-aos={"fade-" + item[2]}
               className="skillsImg"
               src={item[0]}
               height="200"
