@@ -1,8 +1,5 @@
 {
   "version": 2,
   "alias": ["www.christopherpfaff.com"],
-  "builds": [
-    { "src": "bundle.js", "use": "@now/node" },
-    { "src": "index.html", "use": "@now/static" }
-  ]
+  "builds": [{ "src": "index.html", "use": "@now/static" }]
 }
