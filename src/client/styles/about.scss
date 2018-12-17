@@ -16,8 +16,8 @@
 
 .aboutParagraph {
   font-family: "Lusitana", serif;
-  line-height: 24px;
-  font-size: 20px;
+  line-height: 35px;
+  font-size: 28px;
   padding: 50px;
 }
 
@@ -44,26 +44,30 @@
 .skillsList li {
   padding: 20px;
   font-size: 30px;
+  text-align: center;
+  color: black;
 }
 
-@media only screen and (max-width: 512px) {
-  .aboutContainer {
-    padding: 30px;
-    text-align: center;
-  }
-  .aboutImage {
-    border: solid black;
-    box-shadow: 2px 2px gray;
+@media only screen and (max-width: 881px) {
+  .aboutParagraph {
+    line-height: 28px;
+    font-size: 22px;
+    padding: 20px;
   }
 }
 
-@media only screen and (max-width: 512px) {
-  .aboutContainer {
-    padding: 10px;
-    text-align: center;
+@media only screen and (max-width: 577px) {
+  .aboutParagraph {
+    line-height: 28px;
+    font-size: 18px;
+    padding: 20px;
   }
-  .aboutImage {
-    border: solid black;
-    box-shadow: 2px 2px gray;
+}
+
+@media only screen and (max-width: 393px) {
+  .aboutParagraph {
+    line-height: 22px;
+    font-size: 13px;
+    padding: 20px;
   }
 }
