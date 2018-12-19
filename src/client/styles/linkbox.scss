@@ -99,3 +99,23 @@
     width: 350px;
   }
 }
+
+@media only screen and (max-width: 443px) {
+  .linkImg {
+    height: 150px;
+    width: 200px;
+    border: solid black;
+    border-radius: 7px;
+    -webkit-box-shadow: 0em 0.2em 0em inset;
+    -moz-box-shadow: 0em 0.2em 0em inset;
+    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.46);
+  }
+
+  .containerImage {
+    margin-top: 15px;
+    border-radius: 6px;
+    margin-bottom: 100px;
+    height: 150px;
+    width: 250px;
+  }
+}
