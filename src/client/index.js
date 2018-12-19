@@ -5,7 +5,6 @@ import App from "./Components/App";
 import About from "./Components/About";
 import Blog from "./Components/Blog";
 import Links from "./Components/Links";
-import Line from "./Components/Line";
 import NoMatch from "./Components/NoMatch";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";

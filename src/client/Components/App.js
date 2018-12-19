@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 
 import Header from "./Header";
 import Line from "./Line";
-import Blog from "./Blog";
-import About from "./About";
-import Links from "./Links";
+
 //import RouteButtons from "./RouteButtons";
 import "../styles/app.scss";
 import "../styles/routebuttons.scss";
