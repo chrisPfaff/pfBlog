@@ -134,8 +134,6 @@ class Links extends Component {
             data-aos="zoom-in-up"
             data-aos-duration="2000"
             className="containerImage"
-            height="450px"
-            width="600px"
             src="src/client/img/programming.jpg"
             alt="picture of computer"
           />
