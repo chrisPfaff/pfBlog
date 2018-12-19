@@ -72,9 +72,11 @@ class About extends Component {
         <Header />
         <div className="aboutContainer">
           <img
+            data-aos="zoom-in-up"
+            data-aos-duration="2000"
             className="aboutImage"
-            height="350px"
-            width="300px"
+            height="450px"
+            width="350px"
             src="src/client/img/chris.jpg"
             alt="picture of myself"
           />

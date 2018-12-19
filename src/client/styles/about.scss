@@ -11,7 +11,10 @@
 .aboutImage {
   border-radius: 7px;
   border: solid black;
-  box-shadow: 2px 2px gray;
+  -webkit-box-shadow: 0em 0.2em 0em inset;
+  -moz-box-shadow: 0em 0.2em 0em inset;
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.46);
+  margin: 50px 0 100px 0;
 }
 
 .aboutParagraph {
@@ -19,6 +22,7 @@
   line-height: 35px;
   font-size: 28px;
   padding: 50px;
+  margin-bottom: 50px;
   background-color: white;
   border: solid black;
   border-radius: 7px;

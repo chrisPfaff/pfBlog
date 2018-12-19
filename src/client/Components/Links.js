@@ -130,6 +130,15 @@ class Links extends Component {
       <div>
         <Header />
         <div className="linkContainer">
+          <img
+            data-aos="zoom-in-up"
+            data-aos-duration="2000"
+            className="containerImage"
+            height="450px"
+            width="600px"
+            src="src/client/img/programming.jpg"
+            alt="picture of computer"
+          />
           <p className="linkSectionTitle">My Links</p>
           {myLinks}
           <p className="linkSectionTitleDev">Favorite Dev Links</p>
