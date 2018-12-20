@@ -101,11 +101,18 @@ class Links extends Component {
           "right"
         ],
         [
+          "src/client/img/fingerroll.png",
+          "#",
+          "A MERN Stack App that allows users to keep track of favorite NBA team (working on it currently)",
+          <FaCode />,
+          "left"
+        ],
+        [
           "src/client/img/dogmessanger.png",
           "https://dog-messenger.herokuapp.com/",
           "Basic App that sends you a picture of a dog",
           <FaCode />,
-          "left"
+          "right"
         ]
       ]
     };
