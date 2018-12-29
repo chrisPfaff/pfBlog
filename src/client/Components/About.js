@@ -55,6 +55,7 @@ class About extends Component {
           <ol>
             <img
               data-aos={"fade-" + item[2]}
+              data-aos-duration="1000"
               className="skillsImg"
               src={item[0]}
               height="200"

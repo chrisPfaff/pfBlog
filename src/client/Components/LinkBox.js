@@ -19,7 +19,11 @@ class LinkBox extends Component {
 
   render() {
     return (
-      <div className="linkBox" data-aos={"fade-" + this.props.data[4]}>
+      <div
+        className="linkBox"
+        data-aos={"fade-" + this.props.data[4]}
+        data-aos-duration="1000"
+      >
         <ol>
           <li>
             <a href={this.props.data[1]}>
