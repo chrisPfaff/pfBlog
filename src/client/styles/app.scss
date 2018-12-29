@@ -144,18 +144,10 @@ table {
 
 body::after {
   content: "";
-  background: #757f9a; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #d7dde8,
-    #757f9a
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #d7dde8,
-    #757f9a
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background-image: url("../img/Vintage-Texture.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   opacity: 1;
   top: 0;
   left: 0;
