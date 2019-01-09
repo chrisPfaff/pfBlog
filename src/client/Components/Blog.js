@@ -12,7 +12,7 @@ class Blog extends Component {
       <div>
         <Header />
         <div className="blogContainer">
-          <h2 className="blogDate">Nov 14 2018</h2>
+          <h2 className="blogDate">Nov 13 2018</h2>
           <h2 className="blogPost">es6 classes</h2>
           <section className="codeSandBox">
             <iframe
