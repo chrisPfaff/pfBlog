@@ -18,6 +18,16 @@
   border-right: none;
 }
 
+.link.one {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.link.three {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
 .routeButtons .link:hover {
   background: white;
   color: black;

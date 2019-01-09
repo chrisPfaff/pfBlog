@@ -106,7 +106,6 @@ section {
 }
 body {
   line-height: 1;
-  background-color: white;
 }
 ol,
 ul {
@@ -140,28 +139,4 @@ table {
 
 .link:visited {
   color: black;
-}
-
-body::after {
-  content: "";
-  background-image: url("../img/Vintage-Texture.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  opacity: 1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1;
-}
-body::after {
-  content: "";
-  border-bottom: solid;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
 }
