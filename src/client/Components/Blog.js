@@ -127,9 +127,113 @@ class Blog extends Component {
               allowtransparency="true"
             />
           </section>
-          <h2 className="blogDate">Nov 10 2018</h2>
-          <h2 className="blogPost">Async Await</h2>
-          <section className="codeSandBox" />
+          <h2 className="blogPost">Instance Methods</h2>
+          <section className="blogText">
+            <p>
+              Like a constructor a instance method is just a function that on
+              inside the class object. They operate just like functions and can
+              be used like function invocations on the class object. In this
+              example{" "}
+            </p>
+          </section>
+          <section className="codeSandBox">
+            <iframe
+              height="265"
+              scrolling="no"
+              title="class 5"
+              src="//codepen.io/ChrisPfaff10/embed/ebLWKg/?height=265&theme-id=0&default-tab=js"
+              frameborder="no"
+              allowtransparency="true"
+            />
+          </section>
+          <section className="blogText">
+            <p>
+              If you were to call Joe.sayName() it would produce a log of "Hello
+              my name is Joe", which would be completely different depending
+              upon when the Class is first instantiated. If you were to do
+            </p>
+          </section>
+          <section className="codeSandBox">
+            <iframe
+              height="265"
+              scrolling="no"
+              title="class 6"
+              src="//codepen.io/ChrisPfaff10/embed/EGemew/?height=265&theme-id=0&default-tab=js"
+              frameBorder="no"
+              allowtransparency="true"
+            />
+          </section>
+          <section className="blogText">
+            <p>The same method would log "Hello my name is Chris".</p>
+          </section>
+          <h2 className="blogPost">Getters and Setters</h2>
+          <section className="blogText">
+            <p>
+              Getters and setters can be used to define methods on the class
+              which then are used as if they are properties. To define a getter
+              you use the get then the method name just like how you would with
+              a regular method inside a class.
+            </p>
+          </section>
+          <section className="codeSandBox">
+            <iframe
+              height="265"
+              scrolling="no"
+              title="class 7"
+              src="//codepen.io/ChrisPfaff10/embed/REYVYE/?height=265&theme-id=0&default-tab=js"
+              frameBorder="no"
+              allowtransparency="true"
+            />
+          </section>
+          <section className="blogText">
+            <p>
+              Since the getter acts like a property there is no need to invoke
+              the ageOfPerson method when using it. Joe.ageOfPerson would return
+              30. Setters work pretty much the same way you can assign new
+              values to your instance properties with a property like syntax.{" "}
+            </p>
+          </section>
+          <section className="codeSandBox">
+            <iframe
+              height="265"
+              scrolling="no"
+              title="class 8"
+              src="//codepen.io/ChrisPfaff10/embed/NeLjoq/?height=265&theme-id=0&default-tab=js"
+              frameBorder="no"
+              allowtransparency="true"
+            />
+          </section>
+          <section className="blogText">
+            <p>
+              The Joe.newAge setter can be used just like how object property
+              reassignment syntax works with dot notation.{" "}
+            </p>
+          </section>
+          <h2 className="blogPost">Static Methods</h2>
+          <section className="blogText">
+            <p>
+              A static method is a method defined on a class but it is not part
+              of the instantiated object once its been created. It does not
+              require an instance of an object to be used. Most static methods
+              are helper methods or utilities that are relevant to the class but
+              dont have an object bound to them. Like with getters and setters
+              you need to use a keyword before defining the method. In this case
+              that keyword would be static like below. Keep in mind when calling
+              a static method you do not need to instantiate the object before
+              invoking the method also you can call the static method directly
+              from the class.
+            </p>
+          </section>
+          <section className="codeSandBox">
+            <iframe
+              height="265"
+              scrolling="no"
+              title="class 9"
+              src="//codepen.io/ChrisPfaff10/embed/vvzmPb/?height=265&theme-id=0&default-tab=js"
+              frameBorder="no"
+              allowtransparency="true"
+            />
+          </section>
         </div>
       </div>
     );
