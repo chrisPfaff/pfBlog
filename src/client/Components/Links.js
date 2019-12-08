@@ -80,39 +80,46 @@ class Links extends Component {
           "left"
         ],
         [
+          "src/client/img/nasa.png",
+          "#",
+          "React Space, A web app that uses various Nasa API's",
+          <FaCode />,
+          "right"
+        ],
+        [
           "src/client/img/nodecrud.png",
           "https://simple-crud-node.herokuapp.com//",
           "A CRUD App built with node and ejs (no persistent memory)",
           <FaCode />,
-          "right"
+          "left"
         ],
         [
           "src/client/img/baseball.png",
           "https://baseball-landing.herokuapp.com/",
           "LandingPage for fictional baseball team",
           <FaCode />,
-          "left"
+          "right"
         ],
         [
           "src/client/img/art.png",
           "https://claires-gallery.herokuapp.com/",
           "Gallery landing page (built using vanillaJS)",
           <FaCode />,
-          "right"
+          "left"
         ],
         [
           "src/client/img/fingerroll.png",
           "#",
           "A MERN Stack App that allows users to keep track of favorite NBA team (working on it currently)",
           <FaCode />,
-          "left"
+          "right"
         ],
         [
           "src/client/img/dogmessanger.png",
           "https://dog-messenger.herokuapp.com/",
           "Basic App that sends you a picture of a dog",
           <FaCode />,
-          "right"
+          "left"
         ]
       ]
     };

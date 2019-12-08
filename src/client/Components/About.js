@@ -15,21 +15,26 @@ class About extends Component {
     this.state = {
       open: false,
       skills: [
-        ["src/client/img/html5.svg", "HTML5", "left"],
-        ["src/client/img/javascript.svg", "Javascript", "right"],
-        ["src/client/img/css.svg", "CSS3", "left"],
-        ["src/client/img/sass.svg", "SASS/SCSS", "right"],
-        ["src/client/img/react.svg", "React/ReactNative", "left"],
-        ["src/client/img/redux.svg", "Redux", "right"],
-        ["src/client/img/node.svg", "Node", "left"],
-        ["src/client/img/express.svg", "Express", "left"],
-        ["src/client/img/webpack.svg", "Webpack", "right"],
-        ["src/client/img/git.svg", "Git", "left"],
-        ["src/client/img/mongodb.svg", "MongoDB", "right"],
-        ["src/client/img/mongoose.png", "Mongoose", "left"],
-        ["src/client/img/aws.svg", "AWS", "right"],
-        ["src/client/img/ada.png", "Knowledge of ADA compliance", "left"],
-        ["src/client/img/api.png", "API design knowledge", "right"]
+        ["src/client/img/html5.svg", "HTML5", "left", "#E34D25"],
+        ["src/client/img/javascript.svg", "Javascript", "right", "#F7DF1D"],
+        ["src/client/img/css.svg", "CSS3", "left", "#254DE4"],
+        ["src/client/img/sass.svg", "SASS/SCSS", "right", "#CD6799"],
+        ["src/client/img/react.svg", "React/ReactNative", "left", "#61DAFB"],
+        ["src/client/img/redux.svg", "Redux", "right", "#764ABC"],
+        ["src/client/img/node.svg", "Node", "left", "#89BC73"],
+        ["src/client/img/express.svg", "Express", "left", "#212121"],
+        ["src/client/img/webpack.svg", "Webpack", "right", "#7DA0DE"],
+        ["src/client/img/git.svg", "Git", "left", "#EF5133"],
+        ["src/client/img/mongodb.svg", "MongoDB", "right", "#499D4A"],
+        ["src/client/img/mongoose.png", "Mongoose", "left", "#880100"],
+        ["src/client/img/aws.svg", "AWS", "right", "#FF9802"],
+        [
+          "src/client/img/ada.png",
+          "Knowledge of ADA compliance",
+          "left",
+          "#003984"
+        ],
+        ["src/client/img/api.png", "API design knowledge", "right", "#121C24"]
       ]
     };
     this.showModal = () => {
@@ -52,6 +57,19 @@ class About extends Component {
     const skillsList = this.state.skills.map(item => {
       return (
         <div className="skillsList">
+          {/* <div
+            style={{
+              position: "absolute",
+              width: "95%",
+              height: "100%",
+              top: "5%",
+              left: "calc(5% / 2)",
+              zIndex: "-1",
+              borderRadius: "50px",
+              backgroundColor: item[3],
+              filter: "blur(10px)"
+            }}
+          /> */}
           <ol>
             <img
               data-aos={"fade-" + item[2]}
