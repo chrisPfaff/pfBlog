@@ -81,8 +81,8 @@ class Links extends Component {
         ],
         [
           "src/client/img/nasa.png",
-          "#",
-          "React Space, A web app that uses various Nasa API's",
+          "https://react-space-node3.herokuapp.com/",
+          "React Space, A web app that uses various Nasa API's (Work In Progress)",
           <FaCode />,
           "right"
         ],
