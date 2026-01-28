@@ -109,13 +109,38 @@
   }
 }
 
-.color-hint {
+.canvas-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
   margin-top: 3rem;
+  animation: fadeUp 0.8s ease-out 0.5s both;
+}
+
+.color-hint {
   font-size: 1.25rem;
   font-weight: 500;
   opacity: 0.9;
   transition: color 0.3s ease;
-  animation: fadeUp 0.8s ease-out 0.5s both;
+}
+
+.reset-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.05);
+  }
 }
 
 @keyframes fadeUp {
@@ -144,5 +169,10 @@
 
   .color-hint {
     font-size: 0.75rem;
+  }
+
+  .reset-btn {
+    font-size: 0.75rem;
+    padding: 0.4rem 1rem;
   }
 }

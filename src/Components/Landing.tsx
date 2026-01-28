@@ -25,6 +25,13 @@ const Landing = () => {
     setColorIndex((prev) => (prev + 1) % COLORS.length);
   }, []);
 
+  const clearCanvas = useCallback(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }, []);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -158,8 +165,13 @@ const Landing = () => {
           </a>
         </div>
 
-        <div className="color-hint" style={{ color: currentColor }}>
-          Right-click to change color
+        <div className="canvas-controls">
+          <div className="color-hint" style={{ color: currentColor }}>
+            Right-click to change color
+          </div>
+          <button className="reset-btn" onClick={clearCanvas}>
+            Reset Canvas
+          </button>
         </div>
       </div>
     </div>
