@@ -1,13 +1,8 @@
 import "./App.scss";
-
-import UnderConstruction from "./Components/UnderConstruction";
+import Landing from "./Components/Landing";
 
 function App() {
-  return (
-    <>
-      <UnderConstruction />
-    </>
-  );
+  return <Landing />;
 }
 
 export default App;
