@@ -1,4 +1,5 @@
 import "./App.scss";
+
 import Landing from "./Components/Landing";
 
 function App() {

@@ -1,5 +1,6 @@
-import { useRef, useEffect, useState, useCallback } from "react";
 import "../Styles/Landing.scss";
+
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const COLORS = [
   "#6366f1", // indigo
