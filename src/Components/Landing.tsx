@@ -52,9 +52,20 @@ const Landing = () => {
       ctx.putImageData(imageData, 0, 0);
     };
 
+    // Prevent scrolling when touching the canvas
+    const preventScroll = (e: TouchEvent) => {
+      e.preventDefault();
+    };
+
     handleResize();
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    canvas.addEventListener("touchstart", preventScroll, { passive: false });
+    canvas.addEventListener("touchmove", preventScroll, { passive: false });
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      canvas.removeEventListener("touchstart", preventScroll);
+      canvas.removeEventListener("touchmove", preventScroll);
+    };
   }, []);
 
   const getPos = (e: React.MouseEvent | React.TouchEvent) => {
@@ -113,6 +124,7 @@ const Landing = () => {
         className="drawing-canvas"
         onMouseMove={draw}
         onMouseLeave={handleMouseLeave}
+        onTouchStart={draw}
         onTouchMove={draw}
         onTouchEnd={handleMouseLeave}
         onContextMenu={handleContextMenu}
