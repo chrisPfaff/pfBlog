@@ -2,11 +2,18 @@ import "./index.scss";
 
 import App from "./App.tsx";
 import React from "react";
-import ReactDOM from "react-dom";
+import { hydrateRoot, createRoot } from "react-dom/client";
 
-ReactDOM.render(
+const container = document.getElementById("root")!;
+const app = (
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-  document.getElementById("root"),
+  </React.StrictMode>
 );
+
+// Use hydration if pre-rendered HTML exists, otherwise create fresh root
+if (container.hasChildNodes()) {
+  hydrateRoot(container, app);
+} else {
+  createRoot(container).render(app);
+}
