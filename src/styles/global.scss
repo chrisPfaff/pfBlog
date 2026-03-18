@@ -138,6 +138,7 @@ body {
   align-items: center;
   gap: 1rem;
   z-index: 1;
+  pointer-events: none;
 }
 
 .color-hint {
@@ -157,6 +158,7 @@ body {
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
+  pointer-events: auto;
 
   &:hover {
     border-color: rgba(255, 255, 255, 0.6);
