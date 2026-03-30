@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+User-agent: PetalBot
+Disallow: /
+
 Sitemap: https://www.christopherpfaff.com/sitemap.xml
