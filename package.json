@@ -9,8 +9,8 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/react": "^4.2.0",
-    "astro": "^5.5.5",
+    "@astrojs/react": "^3.6.2",
+    "astro": "^6.4.6",
     "devalue": ">=5.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -20,5 +20,9 @@
     "@types/react-dom": "^18.2.19",
     "sass": "^1.71.1",
     "typescript": "^5.2.2"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1",
+    "vite": "^8.0.16"
   }
 }
