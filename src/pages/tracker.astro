@@ -1,5 +1,6 @@
 ---
 export const prerender = false;
+import '../styles/global.scss';
 ---
 
 <!DOCTYPE html>
@@ -7,278 +8,501 @@ export const prerender = false;
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Iron Log</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Iron Log | Christopher Pfaff</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+  <div class="tracker-app">
+    <!-- PIN Screen -->
+    <div class="pin-screen" id="pin-screen">
+      <div class="pin-content">
+        <h1 class="pin-title">Iron Log</h1>
+        <div class="accent-line"></div>
+        <p class="pin-subtitle">Enter your PIN to continue</p>
+        <input type="password" id="pin-input" placeholder="••••" maxlength="8" inputmode="numeric" />
+        <button class="btn-primary" id="pin-submit">Enter</button>
+        <div class="pin-error" id="pin-error"></div>
+      </div>
+    </div>
+
+    <!-- Main App -->
+    <div class="tracker-main" id="tracker-main">
+      <header class="tracker-header">
+        <div class="header-content">
+          <a href="/" class="back-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </a>
+          <h1>Iron Log</h1>
+        </div>
+      </header>
+
+      <!-- View Toggle -->
+      <div class="view-toggle">
+        <button class="view-btn active" data-view="log">Log Workout</button>
+        <button class="view-btn" data-view="history">History</button>
+      </div>
+
+      <!-- Log View -->
+      <div class="view-panel active" id="log-view">
+        <div class="date-picker">
+          <label for="workout-date">Session date</label>
+          <input type="date" id="workout-date" />
+        </div>
+
+        <div class="day-tabs" id="day-tabs"></div>
+        <div class="exercises" id="exercises"></div>
+
+        <div class="save-area">
+          <button class="btn-primary save-btn" id="save-btn">Log Workout</button>
+          <div class="save-note" id="save-note"></div>
+        </div>
+      </div>
+
+      <!-- History View -->
+      <div class="view-panel" id="history-view">
+        <div class="history-grid" id="history-grid"></div>
+        <div class="history-empty" id="history-empty">No workouts logged yet</div>
+      </div>
+    </div>
+  </div>
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: #16110D;
+    .tracker-app {
       min-height: 100vh;
     }
 
+    /* PIN Screen */
     .pin-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .pin-content {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
-      font-family: 'Inter', sans-serif;
+      animation: fadeUp 0.8s ease-out;
     }
-    .pin-screen h1 {
-      font-family: 'Barlow Condensed', sans-serif;
+
+    .pin-title {
+      font-size: clamp(2rem, 6vw, 3rem);
       font-weight: 700;
-      font-size: 34px;
-      color: #F1E9DD;
-      margin-bottom: 24px;
+      background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
     }
+
+    .pin-subtitle {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
     .pin-screen input {
-      background: #201911;
-      border: 1px solid #3A2F22;
-      color: #F1E9DD;
-      font-family: 'Inter', sans-serif;
-      font-size: 18px;
-      padding: 12px 16px;
-      border-radius: 4px;
-      width: 160px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 1.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      width: 140px;
       text-align: center;
-      letter-spacing: 8px;
-      margin-bottom: 16px;
+      letter-spacing: 0.5em;
+      margin-bottom: 1.5rem;
+      transition: border-color 0.3s ease;
     }
+
     .pin-screen input:focus {
       outline: none;
-      border-color: #E3B23C;
+      border-color: #8b5cf6;
     }
-    .pin-screen button {
-      background: #E3B23C;
-      color: #1A140C;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 17px;
+
+    .pin-error {
+      color: #ef4444;
+      font-size: 0.875rem;
+      margin-top: 1rem;
+      min-height: 1.25rem;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
       border: none;
-      border-radius: 4px;
-      padding: 12px 32px;
+      border-radius: 8px;
+      padding: 0.875rem 2rem;
       cursor: pointer;
-    }
-    .pin-screen .error {
-      color: #C97A5A;
-      font-size: 13px;
-      margin-top: 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .ilog {
-      --bg: #16110D;
-      --surface: #201911;
-      --surface-2: #2A2115;
-      --text: #F1E9DD;
-      --text-dim: #9C8F7E;
-      --accent: #E3B23C;
-      --accent-dim: rgba(227,178,60,0.16);
-      --good: #7C9473;
-      --warn: #C97A5A;
-      --line: #3A2F22;
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
+    }
 
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary.saved {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+
+    /* Main Tracker */
+    .tracker-main {
       display: none;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
       max-width: 640px;
       margin: 0 auto;
-      padding: 28px 20px 60px;
+      padding: 1.5rem;
+      padding-bottom: 6rem;
     }
-    .ilog.active { display: block; }
-    .ilog h1 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 34px;
-      letter-spacing: 0.3px;
-      margin: 0 0 2px;
+
+    .tracker-main.active {
+      display: block;
+      animation: fadeUp 0.5s ease-out;
     }
-    .ilog .sub {
-      color: var(--text-dim);
-      font-size: 13px;
-      margin-bottom: 20px;
+
+    .tracker-header {
+      margin-bottom: 2rem;
     }
-    .ilog .datebar {
+
+    .header-content {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 22px;
+      gap: 1rem;
     }
-    .ilog .datebar label {
-      font-size: 12px;
-      color: var(--text-dim);
+
+    .back-link {
+      color: rgba(255, 255, 255, 0.5);
+      transition: color 0.3s ease;
     }
-    .ilog .datebar input[type=date] {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      padding: 6px 8px;
-      border-radius: 3px;
+
+    .back-link:hover {
+      color: #8b5cf6;
     }
-    .ilog .tabs {
+
+    .tracker-header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* View Toggle */
+    .view-toggle {
       display: flex;
-      border-bottom: 1px solid var(--line);
-      margin-bottom: 24px;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.25rem;
+      border-radius: 10px;
     }
-    .ilog .tab {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-dim);
-      background: none;
+
+    .view-btn {
+      flex: 1;
+      background: transparent;
       border: none;
-      padding: 10px 14px 12px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
       cursor: pointer;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -1px;
+      transition: all 0.3s ease;
     }
-    .ilog .tab.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
+
+    .view-btn.active {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
     }
-    .ilog .exercise {
-      border-top: 1px solid var(--line);
-      padding: 16px 0;
+
+    .view-btn:hover:not(.active) {
+      color: rgba(255, 255, 255, 0.8);
     }
-    .ilog .exercise:last-child { border-bottom: 1px solid var(--line); }
-    .ilog .ex-head {
+
+    /* View Panels */
+    .view-panel {
+      display: none;
+    }
+
+    .view-panel.active {
+      display: block;
+    }
+
+    /* Date Picker */
+    .date-picker {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .date-picker label {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .date-picker input {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.875rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+    }
+
+    .date-picker input:focus {
+      outline: none;
+      border-color: #8b5cf6;
+    }
+
+    /* Day Tabs */
+    .day-tabs {
+      display: flex;
+      gap: 0.25rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .day-tab {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.625rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .day-tab.active {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+    }
+
+    .day-tab:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Exercises */
+    .exercise {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .ex-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      gap: 12px;
-      margin-bottom: 6px;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
     }
-    .ilog .ex-name {
+
+    .ex-name {
       font-weight: 600;
-      font-size: 15px;
+      font-size: 1rem;
+      color: #fff;
     }
-    .ilog .ex-target {
-      color: var(--text-dim);
-      font-size: 12px;
+
+    .ex-target {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
       white-space: nowrap;
     }
-    .ilog .ex-last {
-      font-size: 12px;
-      color: var(--text-dim);
-      margin-bottom: 10px;
+
+    .ex-last {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 0.75rem;
     }
-    .ilog .ex-status {
-      font-size: 12px;
-      margin-bottom: 10px;
-      padding-left: 10px;
-      border-left: 2px solid var(--line);
+
+    .ex-status {
+      font-size: 0.75rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
     }
-    .ilog .ex-status.good { border-left-color: var(--good); color: var(--good); }
-    .ilog .ex-status.warn { border-left-color: var(--warn); color: var(--warn); }
-    .ilog .ex-status.neutral { border-left-color: var(--line); color: var(--text-dim); }
-    .ilog .assist-row {
-      margin-bottom: 8px;
+
+    .ex-status.good {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
     }
-    .ilog .assist-row input {
-      width: 90px;
+
+    .ex-status.warn {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
     }
-    .ilog .sets {
+
+    .ex-status.neutral {
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .assist-row {
+      margin-bottom: 0.75rem;
+    }
+
+    .assist-row input {
+      width: 100%;
+      max-width: 200px;
+    }
+
+    .sets {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 0.5rem;
     }
-    .ilog .set-row {
+
+    .set-row {
       display: grid;
-      grid-template-columns: 20px 1fr 1fr;
-      gap: 8px;
+      grid-template-columns: 24px 1fr 1fr;
+      gap: 0.5rem;
       align-items: center;
     }
-    .ilog .set-row.time { grid-template-columns: 20px 1fr; }
-    .ilog .set-row.bw { grid-template-columns: 20px 1fr; }
-    .ilog .set-idx {
-      color: var(--text-dim);
-      font-size: 12px;
+
+    .set-row.time,
+    .set-row.bw {
+      grid-template-columns: 24px 1fr;
+    }
+
+    .set-idx {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
       text-align: center;
     }
-    .ilog input[type=number] {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      padding: 8px 9px;
-      border-radius: 3px;
+
+    .exercise input[type="number"] {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.875rem;
+      padding: 0.625rem 0.75rem;
+      border-radius: 6px;
       width: 100%;
     }
-    .ilog input[type=number]:focus {
+
+    .exercise input[type="number"]:focus {
       outline: none;
-      border-color: var(--accent);
+      border-color: #8b5cf6;
     }
-    .ilog input::placeholder { color: #5C5245; }
-    .ilog .save-bar {
-      position: sticky;
-      bottom: 12px;
-      margin-top: 26px;
+
+    .exercise input::placeholder {
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Save Area */
+    .save-area {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem;
+      background: linear-gradient(to top, #0a0a0b 60%, transparent);
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .ilog .save-btn {
-      background: var(--accent);
-      color: #1A140C;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 17px;
-      letter-spacing: 0.3px;
-      border: none;
-      border-radius: 4px;
-      padding: 13px 34px;
-      cursor: pointer;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.4);
-      transition: transform 0.15s ease;
+
+    .save-btn {
+      width: 100%;
+      max-width: 400px;
     }
-    .ilog .save-btn:active { transform: scale(0.97); }
-    .ilog .save-btn.saved { background: var(--good); }
-    .ilog .empty-note {
-      color: var(--text-dim);
-      font-size: 12px;
+
+    .save-note {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      min-height: 1rem;
+    }
+
+    /* History View */
+    .history-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .history-empty {
       text-align: center;
-      margin-top: 8px;
-      min-height: 16px;
+      color: rgba(255, 255, 255, 0.4);
+      padding: 3rem 1rem;
+      display: none;
+    }
+
+    .history-empty.show {
+      display: block;
+    }
+
+    .history-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .history-date {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .history-day {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 0.25rem;
+    }
+
+    .history-badge {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.375rem 0.75rem;
+      border-radius: 20px;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
-</head>
-<body>
-  <div class="pin-screen" id="pin-screen">
-    <h1>Iron Log</h1>
-    <input type="password" id="pin-input" placeholder="PIN" maxlength="8" inputmode="numeric" />
-    <button id="pin-submit">Enter</button>
-    <div class="error" id="pin-error"></div>
-  </div>
-
-  <div class="ilog" id="ilog">
-    <h1>Iron Log</h1>
-    <div class="sub">Upper/lower split — log your sets, let the range tell you when to add weight.</div>
-
-    <div class="datebar">
-      <label for="ilog-date">Session date</label>
-      <input type="date" id="ilog-date" />
-    </div>
-
-    <div class="tabs" id="ilog-tabs"></div>
-    <div id="ilog-exercises"></div>
-
-    <div class="save-bar">
-      <button class="save-btn" id="ilog-save">Log day</button>
-    </div>
-    <div class="empty-note" id="ilog-note"></div>
-  </div>
 
   <script>
     const DAYS = {
       upperA: {
         label: 'Upper A',
         exercises: [
-          { id: 'ua-bench', name: 'Bench Press (barbell/machine)', sets: 3, min: 8, max: 10, type: 'weight' },
+          { id: 'ua-bench', name: 'Bench Press', sets: 3, min: 8, max: 10, type: 'weight' },
           { id: 'ua-latpull', name: 'Lat Pulldown', sets: 3, min: 10, max: 12, type: 'weight' },
           { id: 'ua-shoulderpress', name: 'Seated DB Shoulder Press', sets: 3, min: 8, max: 10, type: 'weight' },
           { id: 'ua-row', name: 'Chest-Supported Row', sets: 3, min: 10, max: 12, type: 'weight' },
@@ -293,7 +517,7 @@ export const prerender = false;
           { id: 'la-squat', name: 'Barbell Back Squat', sets: 3, min: 8, max: 10, type: 'weight' },
           { id: 'la-rdl', name: 'Romanian Deadlift', sets: 3, min: 8, max: 10, type: 'weight' },
           { id: 'la-legpress', name: 'Leg Press', sets: 2, min: 10, max: 12, type: 'weight' },
-          { id: 'la-legcurl', name: 'Leg Curl (machine)', sets: 3, min: 10, max: 12, type: 'weight' },
+          { id: 'la-legcurl', name: 'Leg Curl', sets: 3, min: 10, max: 12, type: 'weight' },
           { id: 'la-calf', name: 'Standing Calf Raise', sets: 3, min: 12, max: 15, type: 'weight' },
           { id: 'la-plank', name: 'Weighted Plank', sets: 2, min: 30, max: 45, type: 'time' },
         ]
@@ -304,7 +528,7 @@ export const prerender = false;
           { id: 'ub-incline', name: 'Incline DB Press', sets: 3, min: 8, max: 10, type: 'weight' },
           { id: 'ub-cablerow', name: 'Seated Cable Row', sets: 3, min: 10, max: 12, type: 'weight' },
           { id: 'ub-machinepress', name: 'Machine Shoulder Press', sets: 3, min: 8, max: 10, type: 'weight' },
-          { id: 'ub-pullup', name: 'Pull-Ups (or assisted)', sets: 3, min: 6, max: 12, type: 'bodyweight' },
+          { id: 'ub-pullup', name: 'Pull-Ups', sets: 3, min: 6, max: 12, type: 'bodyweight' },
           { id: 'ub-reardelt', name: 'Rear Delt Fly', sets: 2, min: 12, max: 15, type: 'weight' },
           { id: 'ub-hammer', name: 'Hammer Curl', sets: 2, min: 10, max: 12, type: 'weight' },
           { id: 'ub-tricepext', name: 'Overhead Tricep Extension', sets: 2, min: 10, max: 12, type: 'weight' },
@@ -313,9 +537,9 @@ export const prerender = false;
       lowerB: {
         label: 'Lower B',
         exercises: [
-          { id: 'lb-deadlift', name: 'Deadlift (conventional/trap bar)', sets: 3, min: 6, max: 8, type: 'weight' },
+          { id: 'lb-deadlift', name: 'Deadlift', sets: 3, min: 6, max: 8, type: 'weight' },
           { id: 'lb-frontsquat', name: 'Front / Goblet Squat', sets: 3, min: 8, max: 10, type: 'weight' },
-          { id: 'lb-lunge', name: 'Walking Lunges (per leg)', sets: 2, min: 10, max: 12, type: 'weight' },
+          { id: 'lb-lunge', name: 'Walking Lunges', sets: 2, min: 10, max: 12, type: 'weight' },
           { id: 'lb-legext', name: 'Leg Extension', sets: 3, min: 10, max: 12, type: 'weight' },
           { id: 'lb-seatedcalf', name: 'Seated Calf Raise', sets: 3, min: 12, max: 15, type: 'weight' },
           { id: 'lb-kneeraise', name: 'Hanging Knee Raise', sets: 2, min: 10, max: 15, type: 'bodyweight' },
@@ -326,17 +550,23 @@ export const prerender = false;
     let pin = sessionStorage.getItem('workout-pin') || '';
     let log = {};
     let activeDay = 'upperA';
+    let currentView = 'log';
 
     const pinScreen = document.getElementById('pin-screen');
     const pinInput = document.getElementById('pin-input');
     const pinSubmit = document.getElementById('pin-submit');
     const pinError = document.getElementById('pin-error');
-    const ilog = document.getElementById('ilog');
-    const tabsEl = document.getElementById('ilog-tabs');
-    const exEl = document.getElementById('ilog-exercises');
-    const dateInput = document.getElementById('ilog-date');
-    const saveBtn = document.getElementById('ilog-save');
-    const noteEl = document.getElementById('ilog-note');
+    const trackerMain = document.getElementById('tracker-main');
+    const tabsEl = document.getElementById('day-tabs');
+    const exEl = document.getElementById('exercises');
+    const dateInput = document.getElementById('workout-date');
+    const saveBtn = document.getElementById('save-btn');
+    const noteEl = document.getElementById('save-note');
+    const historyGrid = document.getElementById('history-grid');
+    const historyEmpty = document.getElementById('history-empty');
+    const viewBtns = document.querySelectorAll('.view-btn');
+    const logView = document.getElementById('log-view');
+    const historyView = document.getElementById('history-view');
 
     async function checkAuth() {
       if (!pin) return false;
@@ -362,6 +592,7 @@ export const prerender = false;
         log = {};
       }
       render();
+      renderHistory();
     }
 
     async function saveLog() {
@@ -389,7 +620,7 @@ export const prerender = false;
     }
 
     function formatLast(ex, entry) {
-      if (!entry) return 'No sessions logged yet.';
+      if (!entry) return 'No previous session';
       const parts = entry.sets.map(s => {
         if (ex.type === 'weight') return `${s.weight || '–'}×${s.reps || '–'}`;
         if (ex.type === 'bodyweight') return `${s.reps || '–'}${entry.assist ? ` (+${entry.assist}lb)` : ''}`;
@@ -399,23 +630,23 @@ export const prerender = false;
     }
 
     function computeStatus(ex, entry) {
-      if (!entry) return { text: 'No baseline yet — pick a weight you can hit the low end of the range with 1-2 reps in reserve.', level: 'neutral' };
+      if (!entry) return { text: 'Pick a weight you can hit the low end with 1-2 reps in reserve.', level: 'neutral' };
       const metrics = entry.sets.map(s => ex.type === 'time' ? Number(s.secs) : Number(s.reps)).filter(n => !isNaN(n));
       if (!metrics.length) return { text: 'No sets recorded last time.', level: 'neutral' };
       const allAtMax = metrics.every(m => m >= ex.max);
       const anyBelowMin = metrics.some(m => m < ex.min);
       if (allAtMax) {
         const bump = ex.type === 'time' ? 'add 5-10s or load it' : (ex.type === 'bodyweight' ? 'add weight or reduce assist' : 'add ~5lbs');
-        return { text: `Hit the top of the range on every set — ${bump} next time.`, level: 'good' };
+        return { text: `Hit top of range — ${bump} next time.`, level: 'good' };
       }
       if (anyBelowMin) {
-        return { text: 'Came in under range on at least one set — same load next time, focus on reps.', level: 'warn' };
+        return { text: 'Under range — same load, focus on reps.', level: 'warn' };
       }
-      return { text: 'In range — try to add a rep on any set where you can.', level: 'neutral' };
+      return { text: 'In range — try to add a rep where you can.', level: 'neutral' };
     }
 
     function render() {
-      document.querySelectorAll('#ilog-tabs .tab').forEach((btn, i) => {
+      document.querySelectorAll('#day-tabs .day-tab').forEach((btn, i) => {
         btn.classList.toggle('active', Object.keys(DAYS)[i] === activeDay);
       });
 
@@ -434,7 +665,7 @@ export const prerender = false;
           : `${ex.sets} × ${ex.min}-${ex.max}`;
 
         wrap.innerHTML = `
-          <div class="ex-head">
+          <div class="ex-header">
             <div class="ex-name">${ex.name}</div>
             <div class="ex-target">${targetText}</div>
           </div>
@@ -445,7 +676,7 @@ export const prerender = false;
         if (ex.type === 'bodyweight') {
           const assistRow = document.createElement('div');
           assistRow.className = 'assist-row';
-          assistRow.innerHTML = `<input type="number" placeholder="added/assist lb (optional)" data-role="assist" />`;
+          assistRow.innerHTML = `<input type="number" placeholder="Added/assist lbs (optional)" data-role="assist" />`;
           wrap.appendChild(assistRow);
         }
 
@@ -457,7 +688,7 @@ export const prerender = false;
             row.className = 'set-row';
             row.innerHTML = `
               <div class="set-idx">${i}</div>
-              <input type="number" placeholder="lb" data-role="weight" data-set="${i}" />
+              <input type="number" placeholder="lbs" data-role="weight" data-set="${i}" />
               <input type="number" placeholder="reps" data-role="reps" data-set="${i}" />
             `;
           } else if (ex.type === 'bodyweight') {
@@ -480,24 +711,82 @@ export const prerender = false;
       });
     }
 
+    function renderHistory() {
+      const sessions = [];
+      const seenDates = new Set();
+
+      Object.entries(log).forEach(([exId, entries]) => {
+        entries.forEach(entry => {
+          if (!seenDates.has(entry.date)) {
+            seenDates.add(entry.date);
+            const dayKey = Object.keys(DAYS).find(k =>
+              DAYS[k].exercises.some(e => e.id === exId)
+            );
+            sessions.push({
+              date: entry.date,
+              dayLabel: dayKey ? DAYS[dayKey].label : 'Workout'
+            });
+          }
+        });
+      });
+
+      sessions.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      if (sessions.length === 0) {
+        historyGrid.innerHTML = '';
+        historyEmpty.classList.add('show');
+        return;
+      }
+
+      historyEmpty.classList.remove('show');
+      historyGrid.innerHTML = sessions.map(s => {
+        const dateObj = new Date(s.date + 'T00:00:00');
+        const formatted = dateObj.toLocaleDateString('en-US', {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric'
+        });
+        return `
+          <div class="history-item">
+            <div>
+              <div class="history-date">${formatted}</div>
+              <div class="history-day">${s.dayLabel}</div>
+            </div>
+            <div class="history-badge">${s.dayLabel}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
     function initTabs() {
       tabsEl.innerHTML = '';
       Object.keys(DAYS).forEach(key => {
         const btn = document.createElement('button');
-        btn.className = 'tab' + (key === activeDay ? ' active' : '');
+        btn.className = 'day-tab' + (key === activeDay ? ' active' : '');
         btn.textContent = DAYS[key].label;
         btn.onclick = () => { activeDay = key; render(); };
         tabsEl.appendChild(btn);
       });
     }
 
+    function switchView(view) {
+      currentView = view;
+      viewBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.view === view));
+      logView.classList.toggle('active', view === 'log');
+      historyView.classList.toggle('active', view === 'history');
+    }
+
     async function showApp() {
       pinScreen.style.display = 'none';
-      ilog.classList.add('active');
+      trackerMain.classList.add('active');
       dateInput.value = new Date().toISOString().slice(0, 10);
       initTabs();
       await loadLog();
     }
+
+    viewBtns.forEach(btn => {
+      btn.addEventListener('click', () => switchView(btn.dataset.view));
+    });
 
     pinSubmit.addEventListener('click', async () => {
       pin = pinInput.value;
@@ -523,7 +812,7 @@ export const prerender = false;
       const date = dateInput.value || new Date().toISOString().slice(0, 10);
       let loggedAny = false;
 
-      document.querySelectorAll('#ilog-exercises .exercise').forEach(wrap => {
+      document.querySelectorAll('#exercises .exercise').forEach(wrap => {
         const exId = wrap.dataset.exId;
         const type = wrap.dataset.type;
         const sets = [];
@@ -559,24 +848,24 @@ export const prerender = false;
       });
 
       if (!loggedAny) {
-        noteEl.textContent = 'Nothing entered — fill in at least one set before logging.';
+        noteEl.textContent = 'Fill in at least one set.';
         return;
       }
 
       const saved = await saveLog();
       if (saved) {
         saveBtn.classList.add('saved');
-        saveBtn.textContent = 'Logged';
-        noteEl.textContent = `Saved ${DAYS[activeDay].label} for ${date}.`;
+        saveBtn.textContent = 'Logged!';
+        noteEl.textContent = `Saved ${DAYS[activeDay].label} for ${date}`;
         setTimeout(() => {
           saveBtn.classList.remove('saved');
-          saveBtn.textContent = 'Log day';
-        }, 1400);
+          saveBtn.textContent = 'Log Workout';
+        }, 1500);
         render();
+        renderHistory();
       }
     });
 
-    // Auto-login if PIN is stored
     (async () => {
       if (pin) {
         const valid = await checkAuth();
