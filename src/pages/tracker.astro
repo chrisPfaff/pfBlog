@@ -313,9 +313,9 @@ import '../styles/global.scss';
     .ex-header {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: center;
       gap: 1rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
 
     .ex-name {
@@ -326,77 +326,114 @@ import '../styles/global.scss';
 
     .ex-target {
       font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.4);
+      color: #8b5cf6;
+      background: rgba(139, 92, 246, 0.15);
+      padding: 0.25rem 0.625rem;
+      border-radius: 4px;
       white-space: nowrap;
     }
 
     .ex-last {
-      font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.5);
       margin-bottom: 0.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .ex-status {
-      font-size: 0.75rem;
-      padding: 0.5rem 0.75rem;
-      border-radius: 6px;
-      margin-bottom: 1rem;
+      font-size: 0.8rem;
+      padding: 0.625rem 0.875rem;
+      border-radius: 8px;
+      margin-bottom: 1.25rem;
+      line-height: 1.4;
     }
 
     .ex-status.good {
-      background: rgba(16, 185, 129, 0.15);
-      color: #10b981;
+      background: rgba(16, 185, 129, 0.12);
+      color: #34d399;
+      border-left: 3px solid #10b981;
     }
 
     .ex-status.warn {
-      background: rgba(245, 158, 11, 0.15);
-      color: #f59e0b;
+      background: rgba(245, 158, 11, 0.12);
+      color: #fbbf24;
+      border-left: 3px solid #f59e0b;
     }
 
     .ex-status.neutral {
-      background: rgba(255, 255, 255, 0.05);
-      color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.6);
+      border-left: 3px solid rgba(255, 255, 255, 0.2);
     }
 
     .assist-row {
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
     }
 
     .assist-row input {
       width: 100%;
-      max-width: 200px;
+    }
+
+    /* Set Labels */
+    .sets-header {
+      display: grid;
+      grid-template-columns: 32px 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+      padding: 0 0.25rem;
+    }
+
+    .sets-header.single {
+      grid-template-columns: 32px 1fr;
+    }
+
+    .sets-header span {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.35);
+      font-weight: 500;
     }
 
     .sets {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.625rem;
     }
 
     .set-row {
       display: grid;
-      grid-template-columns: 24px 1fr 1fr;
-      gap: 0.5rem;
+      grid-template-columns: 32px 1fr 1fr;
+      gap: 0.75rem;
       align-items: center;
     }
 
     .set-row.time,
     .set-row.bw {
-      grid-template-columns: 24px 1fr;
+      grid-template-columns: 32px 1fr;
     }
 
     .set-idx {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.4);
-      text-align: center;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
     }
 
     .exercise input[type="number"] {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       color: #fff;
       font-family: inherit;
-      font-size: 0.875rem;
+      font-size: 1rem;
+      font-weight: 500;
       padding: 0.625rem 0.75rem;
       border-radius: 6px;
       width: 100%;
@@ -680,6 +717,20 @@ import '../styles/global.scss';
           wrap.appendChild(assistRow);
         }
 
+        // Add column headers
+        const headerRow = document.createElement('div');
+        if (ex.type === 'weight') {
+          headerRow.className = 'sets-header';
+          headerRow.innerHTML = `<span>Set</span><span>Weight</span><span>Reps</span>`;
+        } else if (ex.type === 'bodyweight') {
+          headerRow.className = 'sets-header single';
+          headerRow.innerHTML = `<span>Set</span><span>Reps</span>`;
+        } else {
+          headerRow.className = 'sets-header single';
+          headerRow.innerHTML = `<span>Set</span><span>Time</span>`;
+        }
+        wrap.appendChild(headerRow);
+
         const setsWrap = document.createElement('div');
         setsWrap.className = 'sets';
         for (let i = 1; i <= ex.sets; i++) {
@@ -688,20 +739,20 @@ import '../styles/global.scss';
             row.className = 'set-row';
             row.innerHTML = `
               <div class="set-idx">${i}</div>
-              <input type="number" placeholder="lbs" data-role="weight" data-set="${i}" />
-              <input type="number" placeholder="reps" data-role="reps" data-set="${i}" />
+              <input type="number" inputmode="decimal" data-role="weight" data-set="${i}" />
+              <input type="number" inputmode="numeric" data-role="reps" data-set="${i}" />
             `;
           } else if (ex.type === 'bodyweight') {
             row.className = 'set-row bw';
             row.innerHTML = `
               <div class="set-idx">${i}</div>
-              <input type="number" placeholder="reps" data-role="reps" data-set="${i}" />
+              <input type="number" inputmode="numeric" data-role="reps" data-set="${i}" />
             `;
           } else {
             row.className = 'set-row time';
             row.innerHTML = `
               <div class="set-idx">${i}</div>
-              <input type="number" placeholder="seconds" data-role="secs" data-set="${i}" />
+              <input type="number" inputmode="numeric" data-role="secs" data-set="${i}" />
             `;
           }
           setsWrap.appendChild(row);
