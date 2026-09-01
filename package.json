@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@astrojs/react": "^3.6.2",
+    "@astrojs/vercel": "^11.0.9",
+    "@upstash/redis": "^1.38.3",
     "astro": "^7.2.3",
     "devalue": ">=5.8.1",
     "react": "^18.2.0",

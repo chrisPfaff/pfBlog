@@ -1,0 +1,593 @@
+---
+export const prerender = false;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iron Log</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #16110D;
+      min-height: 100vh;
+    }
+
+    .pin-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      font-family: 'Inter', sans-serif;
+    }
+    .pin-screen h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 34px;
+      color: #F1E9DD;
+      margin-bottom: 24px;
+    }
+    .pin-screen input {
+      background: #201911;
+      border: 1px solid #3A2F22;
+      color: #F1E9DD;
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      padding: 12px 16px;
+      border-radius: 4px;
+      width: 160px;
+      text-align: center;
+      letter-spacing: 8px;
+      margin-bottom: 16px;
+    }
+    .pin-screen input:focus {
+      outline: none;
+      border-color: #E3B23C;
+    }
+    .pin-screen button {
+      background: #E3B23C;
+      color: #1A140C;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      border: none;
+      border-radius: 4px;
+      padding: 12px 32px;
+      cursor: pointer;
+    }
+    .pin-screen .error {
+      color: #C97A5A;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    .ilog {
+      --bg: #16110D;
+      --surface: #201911;
+      --surface-2: #2A2115;
+      --text: #F1E9DD;
+      --text-dim: #9C8F7E;
+      --accent: #E3B23C;
+      --accent-dim: rgba(227,178,60,0.16);
+      --good: #7C9473;
+      --warn: #C97A5A;
+      --line: #3A2F22;
+
+      display: none;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+    .ilog.active { display: block; }
+    .ilog h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 34px;
+      letter-spacing: 0.3px;
+      margin: 0 0 2px;
+    }
+    .ilog .sub {
+      color: var(--text-dim);
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .ilog .datebar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    .ilog .datebar label {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    .ilog .datebar input[type=date] {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      padding: 6px 8px;
+      border-radius: 3px;
+    }
+    .ilog .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 24px;
+    }
+    .ilog .tab {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-dim);
+      background: none;
+      border: none;
+      padding: 10px 14px 12px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+    .ilog .tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .ilog .exercise {
+      border-top: 1px solid var(--line);
+      padding: 16px 0;
+    }
+    .ilog .exercise:last-child { border-bottom: 1px solid var(--line); }
+    .ilog .ex-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .ilog .ex-name {
+      font-weight: 600;
+      font-size: 15px;
+    }
+    .ilog .ex-target {
+      color: var(--text-dim);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .ilog .ex-last {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 10px;
+    }
+    .ilog .ex-status {
+      font-size: 12px;
+      margin-bottom: 10px;
+      padding-left: 10px;
+      border-left: 2px solid var(--line);
+    }
+    .ilog .ex-status.good { border-left-color: var(--good); color: var(--good); }
+    .ilog .ex-status.warn { border-left-color: var(--warn); color: var(--warn); }
+    .ilog .ex-status.neutral { border-left-color: var(--line); color: var(--text-dim); }
+    .ilog .assist-row {
+      margin-bottom: 8px;
+    }
+    .ilog .assist-row input {
+      width: 90px;
+    }
+    .ilog .sets {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .ilog .set-row {
+      display: grid;
+      grid-template-columns: 20px 1fr 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+    .ilog .set-row.time { grid-template-columns: 20px 1fr; }
+    .ilog .set-row.bw { grid-template-columns: 20px 1fr; }
+    .ilog .set-idx {
+      color: var(--text-dim);
+      font-size: 12px;
+      text-align: center;
+    }
+    .ilog input[type=number] {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      padding: 8px 9px;
+      border-radius: 3px;
+      width: 100%;
+    }
+    .ilog input[type=number]:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .ilog input::placeholder { color: #5C5245; }
+    .ilog .save-bar {
+      position: sticky;
+      bottom: 12px;
+      margin-top: 26px;
+      display: flex;
+      justify-content: center;
+    }
+    .ilog .save-btn {
+      background: var(--accent);
+      color: #1A140C;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: 0.3px;
+      border: none;
+      border-radius: 4px;
+      padding: 13px 34px;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+      transition: transform 0.15s ease;
+    }
+    .ilog .save-btn:active { transform: scale(0.97); }
+    .ilog .save-btn.saved { background: var(--good); }
+    .ilog .empty-note {
+      color: var(--text-dim);
+      font-size: 12px;
+      text-align: center;
+      margin-top: 8px;
+      min-height: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="pin-screen" id="pin-screen">
+    <h1>Iron Log</h1>
+    <input type="password" id="pin-input" placeholder="PIN" maxlength="8" inputmode="numeric" />
+    <button id="pin-submit">Enter</button>
+    <div class="error" id="pin-error"></div>
+  </div>
+
+  <div class="ilog" id="ilog">
+    <h1>Iron Log</h1>
+    <div class="sub">Upper/lower split — log your sets, let the range tell you when to add weight.</div>
+
+    <div class="datebar">
+      <label for="ilog-date">Session date</label>
+      <input type="date" id="ilog-date" />
+    </div>
+
+    <div class="tabs" id="ilog-tabs"></div>
+    <div id="ilog-exercises"></div>
+
+    <div class="save-bar">
+      <button class="save-btn" id="ilog-save">Log day</button>
+    </div>
+    <div class="empty-note" id="ilog-note"></div>
+  </div>
+
+  <script>
+    const DAYS = {
+      upperA: {
+        label: 'Upper A',
+        exercises: [
+          { id: 'ua-bench', name: 'Bench Press (barbell/machine)', sets: 3, min: 8, max: 10, type: 'weight' },
+          { id: 'ua-latpull', name: 'Lat Pulldown', sets: 3, min: 10, max: 12, type: 'weight' },
+          { id: 'ua-shoulderpress', name: 'Seated DB Shoulder Press', sets: 3, min: 8, max: 10, type: 'weight' },
+          { id: 'ua-row', name: 'Chest-Supported Row', sets: 3, min: 10, max: 12, type: 'weight' },
+          { id: 'ua-latraise', name: 'Cable Lateral Raise', sets: 2, min: 12, max: 15, type: 'weight' },
+          { id: 'ua-curl', name: 'Bicep Curl', sets: 2, min: 10, max: 12, type: 'weight' },
+          { id: 'ua-pushdown', name: 'Tricep Pushdown', sets: 2, min: 10, max: 12, type: 'weight' },
+        ]
+      },
+      lowerA: {
+        label: 'Lower A',
+        exercises: [
+          { id: 'la-squat', name: 'Barbell Back Squat', sets: 3, min: 8, max: 10, type: 'weight' },
+          { id: 'la-rdl', name: 'Romanian Deadlift', sets: 3, min: 8, max: 10, type: 'weight' },
+          { id: 'la-legpress', name: 'Leg Press', sets: 2, min: 10, max: 12, type: 'weight' },
+          { id: 'la-legcurl', name: 'Leg Curl (machine)', sets: 3, min: 10, max: 12, type: 'weight' },
+          { id: 'la-calf', name: 'Standing Calf Raise', sets: 3, min: 12, max: 15, type: 'weight' },
+          { id: 'la-plank', name: 'Weighted Plank', sets: 2, min: 30, max: 45, type: 'time' },
+        ]
+      },
+      upperB: {
+        label: 'Upper B',
+        exercises: [
+          { id: 'ub-incline', name: 'Incline DB Press', sets: 3, min: 8, max: 10, type: 'weight' },
+          { id: 'ub-cablerow', name: 'Seated Cable Row', sets: 3, min: 10, max: 12, type: 'weight' },
+          { id: 'ub-machinepress', name: 'Machine Shoulder Press', sets: 3, min: 8, max: 10, type: 'weight' },
+          { id: 'ub-pullup', name: 'Pull-Ups (or assisted)', sets: 3, min: 6, max: 12, type: 'bodyweight' },
+          { id: 'ub-reardelt', name: 'Rear Delt Fly', sets: 2, min: 12, max: 15, type: 'weight' },
+          { id: 'ub-hammer', name: 'Hammer Curl', sets: 2, min: 10, max: 12, type: 'weight' },
+          { id: 'ub-tricepext', name: 'Overhead Tricep Extension', sets: 2, min: 10, max: 12, type: 'weight' },
+        ]
+      },
+      lowerB: {
+        label: 'Lower B',
+        exercises: [
+          { id: 'lb-deadlift', name: 'Deadlift (conventional/trap bar)', sets: 3, min: 6, max: 8, type: 'weight' },
+          { id: 'lb-frontsquat', name: 'Front / Goblet Squat', sets: 3, min: 8, max: 10, type: 'weight' },
+          { id: 'lb-lunge', name: 'Walking Lunges (per leg)', sets: 2, min: 10, max: 12, type: 'weight' },
+          { id: 'lb-legext', name: 'Leg Extension', sets: 3, min: 10, max: 12, type: 'weight' },
+          { id: 'lb-seatedcalf', name: 'Seated Calf Raise', sets: 3, min: 12, max: 15, type: 'weight' },
+          { id: 'lb-kneeraise', name: 'Hanging Knee Raise', sets: 2, min: 10, max: 15, type: 'bodyweight' },
+        ]
+      },
+    };
+
+    let pin = sessionStorage.getItem('workout-pin') || '';
+    let log = {};
+    let activeDay = 'upperA';
+
+    const pinScreen = document.getElementById('pin-screen');
+    const pinInput = document.getElementById('pin-input');
+    const pinSubmit = document.getElementById('pin-submit');
+    const pinError = document.getElementById('pin-error');
+    const ilog = document.getElementById('ilog');
+    const tabsEl = document.getElementById('ilog-tabs');
+    const exEl = document.getElementById('ilog-exercises');
+    const dateInput = document.getElementById('ilog-date');
+    const saveBtn = document.getElementById('ilog-save');
+    const noteEl = document.getElementById('ilog-note');
+
+    async function checkAuth() {
+      if (!pin) return false;
+      try {
+        const res = await fetch('/api/workout', {
+          headers: { 'x-workout-pin': pin }
+        });
+        return res.ok;
+      } catch {
+        return false;
+      }
+    }
+
+    async function loadLog() {
+      try {
+        const res = await fetch('/api/workout', {
+          headers: { 'x-workout-pin': pin }
+        });
+        if (!res.ok) throw new Error('Failed to load');
+        const data = await res.json();
+        log = data.value ? (typeof data.value === 'string' ? JSON.parse(data.value) : data.value) : {};
+      } catch {
+        log = {};
+      }
+      render();
+    }
+
+    async function saveLog() {
+      try {
+        const res = await fetch('/api/workout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-workout-pin': pin
+          },
+          body: JSON.stringify({ value: JSON.stringify(log) })
+        });
+        if (!res.ok) throw new Error('Failed to save');
+        return true;
+      } catch {
+        noteEl.textContent = 'Could not save — try again.';
+        return false;
+      }
+    }
+
+    function lastEntry(exId) {
+      const arr = log[exId];
+      if (!arr || !arr.length) return null;
+      return arr[arr.length - 1];
+    }
+
+    function formatLast(ex, entry) {
+      if (!entry) return 'No sessions logged yet.';
+      const parts = entry.sets.map(s => {
+        if (ex.type === 'weight') return `${s.weight || '–'}×${s.reps || '–'}`;
+        if (ex.type === 'bodyweight') return `${s.reps || '–'}${entry.assist ? ` (+${entry.assist}lb)` : ''}`;
+        if (ex.type === 'time') return `${s.secs || '–'}s`;
+      });
+      return `Last (${entry.date}): ${parts.join(', ')}`;
+    }
+
+    function computeStatus(ex, entry) {
+      if (!entry) return { text: 'No baseline yet — pick a weight you can hit the low end of the range with 1-2 reps in reserve.', level: 'neutral' };
+      const metrics = entry.sets.map(s => ex.type === 'time' ? Number(s.secs) : Number(s.reps)).filter(n => !isNaN(n));
+      if (!metrics.length) return { text: 'No sets recorded last time.', level: 'neutral' };
+      const allAtMax = metrics.every(m => m >= ex.max);
+      const anyBelowMin = metrics.some(m => m < ex.min);
+      if (allAtMax) {
+        const bump = ex.type === 'time' ? 'add 5-10s or load it' : (ex.type === 'bodyweight' ? 'add weight or reduce assist' : 'add ~5lbs');
+        return { text: `Hit the top of the range on every set — ${bump} next time.`, level: 'good' };
+      }
+      if (anyBelowMin) {
+        return { text: 'Came in under range on at least one set — same load next time, focus on reps.', level: 'warn' };
+      }
+      return { text: 'In range — try to add a rep on any set where you can.', level: 'neutral' };
+    }
+
+    function render() {
+      document.querySelectorAll('#ilog-tabs .tab').forEach((btn, i) => {
+        btn.classList.toggle('active', Object.keys(DAYS)[i] === activeDay);
+      });
+
+      exEl.innerHTML = '';
+      DAYS[activeDay].exercises.forEach(ex => {
+        const entry = lastEntry(ex.id);
+        const status = computeStatus(ex, entry);
+
+        const wrap = document.createElement('div');
+        wrap.className = 'exercise';
+        wrap.dataset.exId = ex.id;
+        wrap.dataset.type = ex.type;
+
+        const targetText = ex.type === 'time'
+          ? `${ex.sets} × ${ex.min}-${ex.max}s`
+          : `${ex.sets} × ${ex.min}-${ex.max}`;
+
+        wrap.innerHTML = `
+          <div class="ex-head">
+            <div class="ex-name">${ex.name}</div>
+            <div class="ex-target">${targetText}</div>
+          </div>
+          <div class="ex-last">${formatLast(ex, entry)}</div>
+          <div class="ex-status ${status.level}">${status.text}</div>
+        `;
+
+        if (ex.type === 'bodyweight') {
+          const assistRow = document.createElement('div');
+          assistRow.className = 'assist-row';
+          assistRow.innerHTML = `<input type="number" placeholder="added/assist lb (optional)" data-role="assist" />`;
+          wrap.appendChild(assistRow);
+        }
+
+        const setsWrap = document.createElement('div');
+        setsWrap.className = 'sets';
+        for (let i = 1; i <= ex.sets; i++) {
+          const row = document.createElement('div');
+          if (ex.type === 'weight') {
+            row.className = 'set-row';
+            row.innerHTML = `
+              <div class="set-idx">${i}</div>
+              <input type="number" placeholder="lb" data-role="weight" data-set="${i}" />
+              <input type="number" placeholder="reps" data-role="reps" data-set="${i}" />
+            `;
+          } else if (ex.type === 'bodyweight') {
+            row.className = 'set-row bw';
+            row.innerHTML = `
+              <div class="set-idx">${i}</div>
+              <input type="number" placeholder="reps" data-role="reps" data-set="${i}" />
+            `;
+          } else {
+            row.className = 'set-row time';
+            row.innerHTML = `
+              <div class="set-idx">${i}</div>
+              <input type="number" placeholder="seconds" data-role="secs" data-set="${i}" />
+            `;
+          }
+          setsWrap.appendChild(row);
+        }
+        wrap.appendChild(setsWrap);
+        exEl.appendChild(wrap);
+      });
+    }
+
+    function initTabs() {
+      tabsEl.innerHTML = '';
+      Object.keys(DAYS).forEach(key => {
+        const btn = document.createElement('button');
+        btn.className = 'tab' + (key === activeDay ? ' active' : '');
+        btn.textContent = DAYS[key].label;
+        btn.onclick = () => { activeDay = key; render(); };
+        tabsEl.appendChild(btn);
+      });
+    }
+
+    async function showApp() {
+      pinScreen.style.display = 'none';
+      ilog.classList.add('active');
+      dateInput.value = new Date().toISOString().slice(0, 10);
+      initTabs();
+      await loadLog();
+    }
+
+    pinSubmit.addEventListener('click', async () => {
+      pin = pinInput.value;
+      if (!pin) {
+        pinError.textContent = 'Enter a PIN';
+        return;
+      }
+      pinError.textContent = 'Checking...';
+      const valid = await checkAuth();
+      if (valid) {
+        sessionStorage.setItem('workout-pin', pin);
+        showApp();
+      } else {
+        pinError.textContent = 'Invalid PIN';
+      }
+    });
+
+    pinInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') pinSubmit.click();
+    });
+
+    saveBtn.addEventListener('click', async () => {
+      const date = dateInput.value || new Date().toISOString().slice(0, 10);
+      let loggedAny = false;
+
+      document.querySelectorAll('#ilog-exercises .exercise').forEach(wrap => {
+        const exId = wrap.dataset.exId;
+        const type = wrap.dataset.type;
+        const sets = [];
+        let assist = null;
+
+        if (type === 'bodyweight') {
+          const assistInput = wrap.querySelector('[data-role=assist]');
+          if (assistInput && assistInput.value) assist = assistInput.value;
+        }
+
+        const setRows = wrap.querySelectorAll('.set-row');
+        setRows.forEach(row => {
+          if (type === 'weight') {
+            const w = row.querySelector('[data-role=weight]').value;
+            const r = row.querySelector('[data-role=reps]').value;
+            if (w || r) sets.push({ weight: w, reps: r });
+          } else if (type === 'bodyweight') {
+            const r = row.querySelector('[data-role=reps]').value;
+            if (r) sets.push({ reps: r });
+          } else {
+            const s = row.querySelector('[data-role=secs]').value;
+            if (s) sets.push({ secs: s });
+          }
+        });
+
+        if (sets.length) {
+          loggedAny = true;
+          if (!log[exId]) log[exId] = [];
+          const entry = { date, sets };
+          if (assist) entry.assist = assist;
+          log[exId].push(entry);
+        }
+      });
+
+      if (!loggedAny) {
+        noteEl.textContent = 'Nothing entered — fill in at least one set before logging.';
+        return;
+      }
+
+      const saved = await saveLog();
+      if (saved) {
+        saveBtn.classList.add('saved');
+        saveBtn.textContent = 'Logged';
+        noteEl.textContent = `Saved ${DAYS[activeDay].label} for ${date}.`;
+        setTimeout(() => {
+          saveBtn.classList.remove('saved');
+          saveBtn.textContent = 'Log day';
+        }, 1400);
+        render();
+      }
+    });
+
+    // Auto-login if PIN is stored
+    (async () => {
+      if (pin) {
+        const valid = await checkAuth();
+        if (valid) {
+          showApp();
+        } else {
+          sessionStorage.removeItem('workout-pin');
+          pin = '';
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
