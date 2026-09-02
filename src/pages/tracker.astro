@@ -47,7 +47,10 @@ export const prerender = false;
       <div id="exercises"></div>
 
       <div id="save-area">
-        <button id="save-btn">Log Workout</button>
+        <div id="save-buttons">
+          <button id="save-btn">Log Workout</button>
+          <button id="cancel-btn" style="display: none;">Cancel</button>
+        </div>
         <div id="save-note"></div>
       </div>
     </div>
@@ -448,6 +451,34 @@ export const prerender = false;
       background: linear-gradient(135deg, #10b981, #059669);
     }
 
+    #save-buttons {
+      display: flex;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    #save-buttons #save-btn {
+      flex: 1;
+    }
+
+    #cancel-btn {
+      padding: 0 1.5rem;
+      height: 52px;
+      background: transparent;
+      color: #a1a1aa;
+      font-weight: 500;
+      font-size: 0.9rem;
+      border: 1px solid #3f3f46;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    #cancel-btn:hover {
+      background: #27272a;
+      color: #fff;
+    }
+
     #save-note {
       font-size: 0.8rem;
       color: rgba(255,255,255,0.5);
@@ -554,7 +585,9 @@ export const prerender = false;
 
     let pin = sessionStorage.getItem('workout-pin') || '';
     let log = {};
+    let loadFailed = false;
     let activeDay = 'upperA';
+    let editingDate = null; // null = new entry, string = editing that date
 
     const pinScreen = document.getElementById('pin-screen');
     const pinInput = document.getElementById('pin-input');
@@ -565,6 +598,7 @@ export const prerender = false;
     const exEl = document.getElementById('exercises');
     const dateInput = document.getElementById('workout-date');
     const saveBtn = document.getElementById('save-btn');
+    const cancelBtn = document.getElementById('cancel-btn');
     const noteEl = document.getElementById('save-note');
     const historyList = document.getElementById('history-list');
     const historyEmpty = document.getElementById('history-empty');
@@ -586,7 +620,15 @@ export const prerender = false;
         if (!res.ok) throw new Error();
         const data = await res.json();
         log = data.value ? (typeof data.value === 'string' ? JSON.parse(data.value) : data.value) : {};
-      } catch { log = {}; }
+        loadFailed = false;
+      } catch {
+        log = {};
+        loadFailed = true;
+        noteEl.textContent = 'Could not load data — click Retry to try again.';
+        noteEl.style.color = '#ef4444';
+        saveBtn.textContent = 'Retry';
+        saveBtn.style.opacity = '0.8';
+      }
       render();
       renderHistory();
     }
@@ -609,6 +651,12 @@ export const prerender = false;
     function lastEntry(exId) {
       const arr = log[exId];
       return arr && arr.length ? arr[arr.length - 1] : null;
+    }
+
+    function entryForDate(exId, date) {
+      const arr = log[exId];
+      if (!arr) return null;
+      return arr.find(e => e.date === date) || null;
     }
 
     function formatLast(ex, entry) {
@@ -649,8 +697,9 @@ export const prerender = false;
       // Exercises
       exEl.innerHTML = '';
       DAYS[activeDay].exercises.forEach(ex => {
-        const entry = lastEntry(ex.id);
-        const status = computeStatus(ex, entry);
+        const lastEnt = lastEntry(ex.id);
+        const editEnt = editingDate ? entryForDate(ex.id, editingDate) : null;
+        const status = computeStatus(ex, lastEnt);
         const isSingleCol = ex.type !== 'weight';
 
         const card = document.createElement('div');
@@ -665,12 +714,13 @@ export const prerender = false;
             <h3>${ex.name}</h3>
             <span class="target">${targetText}</span>
           </div>
-          <div class="last-session">${formatLast(ex, entry)}</div>
+          <div class="last-session">${formatLast(ex, lastEnt)}</div>
           <div class="status ${status.level}">${status.text}</div>
         `;
 
+        const assistVal = editEnt?.assist || '';
         if (ex.type === 'bodyweight') {
-          html += `<div class="assist-input"><input type="number" placeholder="Added/assist lbs (optional)" data-role="assist" /></div>`;
+          html += `<div class="assist-input"><input type="number" placeholder="Added/assist lbs (optional)" data-role="assist" value="${assistVal}" /></div>`;
         }
 
         html += `<div class="sets-container">`;
@@ -682,14 +732,19 @@ export const prerender = false;
         </div>`;
 
         for (let i = 1; i <= ex.sets; i++) {
+          const setData = editEnt?.sets?.[i - 1] || {};
+          const wVal = setData.weight || '';
+          const rVal = setData.reps || '';
+          const sVal = setData.secs || '';
+
           html += `<div class="set-row ${isSingleCol ? 'single-col' : ''}">
             <div class="set-num">${i}</div>
             ${ex.type === 'weight' ? `
-              <input type="number" inputmode="decimal" placeholder="lbs" data-role="weight" data-set="${i}" />
-              <input type="number" inputmode="numeric" placeholder="reps" data-role="reps" data-set="${i}" />
+              <input type="number" inputmode="decimal" placeholder="lbs" data-role="weight" data-set="${i}" value="${wVal}" />
+              <input type="number" inputmode="numeric" placeholder="reps" data-role="reps" data-set="${i}" value="${rVal}" />
             ` : ''}
-            ${ex.type === 'bodyweight' ? `<input type="number" inputmode="numeric" placeholder="reps" data-role="reps" data-set="${i}" />` : ''}
-            ${ex.type === 'time' ? `<input type="number" inputmode="numeric" placeholder="sec" data-role="secs" data-set="${i}" />` : ''}
+            ${ex.type === 'bodyweight' ? `<input type="number" inputmode="numeric" placeholder="reps" data-role="reps" data-set="${i}" value="${rVal}" />` : ''}
+            ${ex.type === 'time' ? `<input type="number" inputmode="numeric" placeholder="sec" data-role="secs" data-set="${i}" value="${sVal}" />` : ''}
           </div>`;
         }
 
@@ -708,7 +763,7 @@ export const prerender = false;
           if (!seenDates.has(entry.date)) {
             seenDates.add(entry.date);
             const dayKey = Object.keys(DAYS).find(k => DAYS[k].exercises.some(e => e.id === exId));
-            sessions.push({ date: entry.date, dayLabel: dayKey ? DAYS[dayKey].label : 'Workout' });
+            sessions.push({ date: entry.date, dayKey: dayKey || '', dayLabel: dayKey ? DAYS[dayKey].label : 'Workout' });
           }
         });
       });
@@ -726,15 +781,42 @@ export const prerender = false;
         const d = new Date(s.date + 'T00:00:00');
         const formatted = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
         return `
-          <div class="history-item">
+          <div class="history-item" data-date="${s.date}" data-day="${s.dayKey}">
             <div>
               <div class="date">${formatted}</div>
               <div class="day-type">${s.dayLabel}</div>
             </div>
-            <span class="badge">${s.dayLabel}</span>
+            <span class="badge">Edit</span>
           </div>
         `;
       }).join('');
+
+      historyList.querySelectorAll('.history-item').forEach(item => {
+        item.style.cursor = 'pointer';
+        item.onclick = () => loadForEdit(item.dataset.date, item.dataset.day);
+      });
+    }
+
+    function loadForEdit(date, dayKey) {
+      editingDate = date;
+      if (dayKey && DAYS[dayKey]) activeDay = dayKey;
+      dateInput.value = date;
+      switchView('log');
+      render();
+      noteEl.textContent = `Editing workout from ${date}`;
+      noteEl.style.color = '#f59e0b';
+      saveBtn.textContent = 'Update Workout';
+      cancelBtn.style.display = 'block';
+    }
+
+    function cancelEdit() {
+      editingDate = null;
+      dateInput.value = new Date().toISOString().slice(0, 10);
+      noteEl.textContent = '';
+      noteEl.style.color = '';
+      saveBtn.textContent = 'Log Workout';
+      cancelBtn.style.display = 'none';
+      render();
     }
 
     function switchView(view) {
@@ -752,6 +834,8 @@ export const prerender = false;
 
     viewBtns.forEach(btn => btn.addEventListener('click', () => switchView(btn.dataset.view)));
 
+    cancelBtn.addEventListener('click', cancelEdit);
+
     pinSubmit.addEventListener('click', async () => {
       pin = pinInput.value;
       if (!pin) { pinError.textContent = 'Enter a PIN'; return; }
@@ -767,6 +851,17 @@ export const prerender = false;
     pinInput.addEventListener('keydown', e => { if (e.key === 'Enter') pinSubmit.click(); });
 
     saveBtn.addEventListener('click', async () => {
+      if (loadFailed) {
+        noteEl.textContent = 'Retrying...';
+        noteEl.style.color = '';
+        await loadLog();
+        if (!loadFailed) {
+          saveBtn.textContent = 'Log Workout';
+          saveBtn.style.opacity = '';
+          noteEl.textContent = 'Data loaded! You can log workouts now.';
+        }
+        return;
+      }
       const date = dateInput.value || new Date().toISOString().slice(0, 10);
       let loggedAny = false;
 
@@ -798,18 +893,31 @@ export const prerender = false;
         if (sets.length) {
           loggedAny = true;
           if (!log[exId]) log[exId] = [];
+
+          // If editing, remove old entry for this date first
+          if (editingDate) {
+            log[exId] = log[exId].filter(e => e.date !== editingDate);
+          }
+
           const entry = { date, sets };
           if (assist) entry.assist = assist;
           log[exId].push(entry);
+        } else if (editingDate && log[exId]) {
+          // If editing and no sets filled, remove old entry
+          log[exId] = log[exId].filter(e => e.date !== editingDate);
         }
       });
 
-      if (!loggedAny) { noteEl.textContent = 'Fill in at least one set.'; return; }
+      if (!loggedAny && !editingDate) { noteEl.textContent = 'Fill in at least one set.'; return; }
 
+      const wasEditing = editingDate;
       if (await saveLog()) {
         saveBtn.classList.add('saved');
-        saveBtn.textContent = 'Logged!';
-        noteEl.textContent = `Saved ${DAYS[activeDay].label} for ${date}`;
+        saveBtn.textContent = wasEditing ? 'Updated!' : 'Logged!';
+        noteEl.textContent = `${wasEditing ? 'Updated' : 'Saved'} ${DAYS[activeDay].label} for ${date}`;
+        noteEl.style.color = '';
+        editingDate = null;
+        cancelBtn.style.display = 'none';
         setTimeout(() => {
           saveBtn.classList.remove('saved');
           saveBtn.textContent = 'Log Workout';
