@@ -523,13 +523,35 @@ export const prerender = false;
       margin-top: 0.25rem;
     }
 
-    .history-item .badge {
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      color: #fff;
+    .history-item .actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .history-item .btn-edit,
+    .history-item .btn-delete {
       font-size: 0.75rem;
       font-weight: 600;
       padding: 0.4rem 0.75rem;
       border-radius: 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .history-item .btn-edit {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+    }
+
+    .history-item .btn-delete {
+      background: transparent;
+      border: 1px solid #ef4444;
+      color: #ef4444;
+    }
+
+    .history-item .btn-delete:hover {
+      background: #ef4444;
+      color: #fff;
     }
   </style>
 
@@ -786,14 +808,17 @@ export const prerender = false;
               <div class="date">${formatted}</div>
               <div class="day-type">${s.dayLabel}</div>
             </div>
-            <span class="badge">Edit</span>
+            <div class="actions">
+              <button class="btn-edit">Edit</button>
+              <button class="btn-delete">Delete</button>
+            </div>
           </div>
         `;
       }).join('');
 
       historyList.querySelectorAll('.history-item').forEach(item => {
-        item.style.cursor = 'pointer';
-        item.onclick = () => loadForEdit(item.dataset.date, item.dataset.day);
+        item.querySelector('.btn-edit').onclick = () => loadForEdit(item.dataset.date, item.dataset.day);
+        item.querySelector('.btn-delete').onclick = () => deleteWorkout(item.dataset.date);
       });
     }
 
@@ -817,6 +842,21 @@ export const prerender = false;
       saveBtn.textContent = 'Log Workout';
       cancelBtn.style.display = 'none';
       render();
+    }
+
+    async function deleteWorkout(date) {
+      if (!confirm(`Delete workout from ${date}?`)) return;
+
+      // Remove all entries for this date
+      Object.keys(log).forEach(exId => {
+        log[exId] = log[exId].filter(e => e.date !== date);
+        if (log[exId].length === 0) delete log[exId];
+      });
+
+      if (await saveLog()) {
+        render();
+        renderHistory();
+      }
     }
 
     function switchView(view) {
