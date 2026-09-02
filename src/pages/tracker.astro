@@ -836,6 +836,16 @@ export const prerender = false;
 
     cancelBtn.addEventListener('click', cancelEdit);
 
+    dateInput.addEventListener('change', () => {
+      if (editingDate && dateInput.value !== editingDate) {
+        editingDate = null;
+        noteEl.textContent = '';
+        noteEl.style.color = '';
+        saveBtn.textContent = 'Log Workout';
+        cancelBtn.style.display = 'none';
+      }
+    });
+
     pinSubmit.addEventListener('click', async () => {
       pin = pinInput.value;
       if (!pin) { pinError.textContent = 'Enter a PIN'; return; }
